@@ -77,3 +77,10 @@ export const Stat = [
     route: ''
   }
 ]
+
+export const AccountSettings = [
+  {
+    text: '账户设置',
+    route: ''
+  }
+]

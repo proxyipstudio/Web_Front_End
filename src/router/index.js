@@ -11,6 +11,7 @@ import Dashboard from '@/components/Dashboard/Dashboard'
 import Orders from '@/components/Orders/Orders'
 import Earning from '@/components/Earning/Earning'
 import Stat from '@/components/Stat/Stat'
+import AccountSettings from '@/components/AccountSettings/AccountSettings'
 
 Vue.use(Router)
 
@@ -69,6 +70,11 @@ export default new Router({
           path: '/backstage/stat',
           name: 'Stat',
           component: Stat
+        },
+        {
+          path: '/backstage/accountsettings',
+          name: 'AccountSettings',
+          component: AccountSettings
         }
       ]
     }

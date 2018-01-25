@@ -80,80 +80,80 @@ import { mapMutations } from 'vuex'
 import { Orders } from '../../common/config/breadcrumb'
 
 export default {
-      data() {
-      return {
-        input5: '',
+  data() {
+    return {
+      input5: '',
       select: '',
-        tableHeight: document.documentElement.clientHeight - 295,
-        multipleSelection: [],
-        curGatherNodeInfo: null,
-        gnData: [
-          {
-            id: '12312',
-            buyer: '12332122231',
-            type: '套餐1',
-            pay: '¥1123',
-            date: '2013-11-32 22:11:23'
-          },
-          {
-            id: '12312',
-            buyer: '12332122231',
-            type: '套餐1',
-            pay: '¥1123',
-            date: '2013-11-32 22:11:23'
-          },
-          {
-            id: '12312',
-            buyer: '12332122231',
-            type: '套餐1',
-            pay: '¥1123',
-            date: '2013-11-32 22:11:23'
-          },
-          {
-            id: '12312',
-            buyer: '12332122231',
-            type: '套餐1',
-            pay: '¥1123',
-            date: '2013-11-32 22:11:23'
-          },
-          {
-            id: '12312',
-            buyer: '12332122231',
-            type: '套餐1',
-            pay: '¥1123',
-            date: '2013-11-32 22:11:23'
-          },
-          {
-            id: '12312',
-            buyer: '12332122231',
-            type: '套餐1',
-            pay: '¥1123',
-            date: '2013-11-32 22:11:23'
-          },
-          {
-            id: '12312',
-            buyer: '12332122231',
-            type: '套餐1',
-            pay: '¥1123',
-            date: '2013-11-32 22:11:23'
-          },
-          {
-            id: '12312',
-            buyer: '12332122231',
-            type: '套餐1',
-            pay: '¥1123',
-            date: '2013-11-32 22:11:23'
-          },
-          {
-            id: '12312',
-            buyer: '12332122231',
-            type: '套餐1',
-            pay: '¥1123',
-            date: '2013-11-32 22:11:23'
-          }
-        ]
-      }
-    },
+      tableHeight: document.documentElement.clientHeight - 295,
+      multipleSelection: [],
+      curGatherNodeInfo: null,
+      gnData: [
+        {
+          id: '12312',
+          buyer: '12332122231',
+          type: '套餐1',
+          pay: '¥1123',
+          date: '2013-11-32 22:11:23'
+        },
+        {
+          id: '12312',
+          buyer: '12332122231',
+          type: '套餐1',
+          pay: '¥1123',
+          date: '2013-11-32 22:11:23'
+        },
+        {
+          id: '12312',
+          buyer: '12332122231',
+          type: '套餐1',
+          pay: '¥1123',
+          date: '2013-11-32 22:11:23'
+        },
+        {
+          id: '12312',
+          buyer: '12332122231',
+          type: '套餐1',
+          pay: '¥1123',
+          date: '2013-11-32 22:11:23'
+        },
+        {
+          id: '12312',
+          buyer: '12332122231',
+          type: '套餐1',
+          pay: '¥1123',
+          date: '2013-11-32 22:11:23'
+        },
+        {
+          id: '12312',
+          buyer: '12332122231',
+          type: '套餐1',
+          pay: '¥1123',
+          date: '2013-11-32 22:11:23'
+        },
+        {
+          id: '12312',
+          buyer: '12332122231',
+          type: '套餐1',
+          pay: '¥1123',
+          date: '2013-11-32 22:11:23'
+        },
+        {
+          id: '12312',
+          buyer: '12332122231',
+          type: '套餐1',
+          pay: '¥1123',
+          date: '2013-11-32 22:11:23'
+        },
+        {
+          id: '12312',
+          buyer: '12332122231',
+          type: '套餐1',
+          pay: '¥1123',
+          date: '2013-11-32 22:11:23'
+        }
+      ]
+    }
+  },
   methods: {
     ...mapMutations({
       setNavActive: 'setNavActive',

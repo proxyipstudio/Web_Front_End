@@ -126,7 +126,7 @@
       }),
     },
     created() {
-      this.setNavActive('2-1');
+      this.setNavActive('2');
 
       this.setBreadcrumb(Hosts)
     }
