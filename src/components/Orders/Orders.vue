@@ -84,7 +84,7 @@ export default {
     return {
       input5: '',
       select: '',
-      tableHeight: document.documentElement.clientHeight - 295,
+      tableHeight: document.documentElement.clientHeight - 285,
       multipleSelection: [],
       curGatherNodeInfo: null,
       gnData: [

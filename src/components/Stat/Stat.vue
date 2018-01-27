@@ -60,7 +60,7 @@ export default {
     }
   },
   created() {
-    this.setNavActive('5')
+    this.setNavActive('6')
 
     this.setBreadcrumb(Stat)
   }

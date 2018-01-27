@@ -84,3 +84,25 @@ export const AccountSettings = [
     route: ''
   }
 ]
+
+export const CheckConfiguration = [
+  {
+    text: '配置项',
+    route: ''
+  },
+  {
+    text: '校验表',
+    route: '/backstage/checkconfiguration'
+  }
+]
+
+export const RuleConfiguration = [
+  {
+    text: '配置项',
+    route: ''
+  },
+  {
+    text: '规则表',
+    route: '/backstage/ruleconfiguration'
+  }
+]

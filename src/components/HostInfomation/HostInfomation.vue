@@ -241,7 +241,7 @@
                   <el-row class="mb10">
                     <el-col :span="9">
                       <div class="grid-content">
-                        <i class="fa fa-inbox"></i>
+                        <i class="fa fa-hdd-o"></i>
                         磁盘1 (C:/) <br>
                         <small class="gray">120G / 2000G</small>
                       </div>
@@ -256,7 +256,7 @@
                   <el-row>
                     <el-col :span="9">
                       <div class="grid-content">
-                        <i class="fa fa-inbox"></i>
+                        <i class="fa fa-hdd-o"></i>
                         磁盘2 (D:/) <br>
                         <small class="gray">120G / 2000G</small>
                       </div>

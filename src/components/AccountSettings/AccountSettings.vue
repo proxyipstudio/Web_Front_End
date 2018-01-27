@@ -61,7 +61,7 @@ export default {
     }
   },
   created() {
-    this.setNavActive('6')
+    this.setNavActive('7')
 
     this.setBreadcrumb(AccountSettings)
   }

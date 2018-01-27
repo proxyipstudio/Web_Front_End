@@ -54,11 +54,22 @@
             </el-menu-item-group>
             
           </el-submenu>
-          <el-menu-item index="5" @click="goto('/backstage/stat')">
+          <el-submenu index="5">
+            <template slot="title">
+              <i class="fa fa-navicon"></i>
+              <span>配置项</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item index="5-1" @click="goto('/backstage/ruleconfiguration')">规则表</el-menu-item>
+              <el-menu-item index="5-2" @click="goto('/backstage/checkconfiguration')">校验表</el-menu-item>
+            </el-menu-item-group>
+            
+          </el-submenu>
+          <el-menu-item index="6" @click="goto('/backstage/stat')">
             <i class="fa fa-bar-chart"></i>
             <span slot="title">统计</span>
           </el-menu-item>
-          <el-menu-item index="6" @click="goto('/backstage/accountsettings')">
+          <el-menu-item index="7" @click="goto('/backstage/accountsettings')">
             <i class="fa fa-cogs"></i>
             <span slot="title">账户设置</span>
           </el-menu-item>

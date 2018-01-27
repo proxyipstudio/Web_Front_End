@@ -12,6 +12,8 @@ import Orders from '@/components/Orders/Orders'
 import Earning from '@/components/Earning/Earning'
 import Stat from '@/components/Stat/Stat'
 import AccountSettings from '@/components/AccountSettings/AccountSettings'
+import RuleConfiguration from '@/components/RuleConfiguration/RuleConfiguration'
+import CheckConfiguration from '@/components/CheckConfiguration/CheckConfiguration'
 
 Vue.use(Router)
 
@@ -33,46 +35,56 @@ export default new Router({
       redirect: '/backstage/dashboard',
       children: [
         {
-          path: '/backstage/dashboard',
+          path: 'dashboard',
           name: 'Dashboard',
           component: Dashboard
         },
         {
-          path: '/backstage/gathernodes',
+          path: 'gathernodes',
           name: 'GatherNodes',
           component: GatherNodes
         },
         {
-          path: '/backstage/users',
+          path: 'users',
           name: 'Users',
           component: Users
         },
         {
-          path: '/backstage/hosts',
+          path: 'hosts',
           name: 'Hosts',
           component: Hosts
         },
         {
-          path: '/backstage/hosts/:id',
+          path: 'hosts/:id',
           component: HostInfomation
         },
         {
-          path: '/backstage/orders',
+          path: 'orders',
           name: 'Orders',
           component: Orders
         },
         {
-          path: '/backstage/earning',
+          path: 'earning',
           name: 'Earning',
           component: Earning
         },
         {
-          path: '/backstage/stat',
+          path: 'stat',
           name: 'Stat',
           component: Stat
         },
         {
-          path: '/backstage/accountsettings',
+          path: 'ruleconfiguration',
+          name: 'RuleConfiguration',
+          component: RuleConfiguration
+        },
+        {
+          path: 'checkconfiguration',
+          name: 'CheckConfiguration',
+          component: CheckConfiguration
+        },
+        {
+          path: 'accountsettings',
           name: 'AccountSettings',
           component: AccountSettings
         }
