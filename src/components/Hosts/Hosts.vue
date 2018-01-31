@@ -69,87 +69,84 @@
 </template>
 
 <script>
-  import { mapMutations } from 'vuex';
-  import { Hosts } from '../../common/config/breadcrumb'
+import { mapMutations } from "vuex";
+import { Hosts } from "../../common/config/breadcrumb";
 
-  export default {
-    mounted () {
-      
-    },
-    data() {
-      return {
-        value1: false,
-        // tableHeight: document.documentElement.clientHeight - 335,
-        multipleSelection: [],
-        vpsData: [
-          {
-            id: '15ASS11',
-            ip: '112.225.212.221',
-            nodecount: 16,
-            cpu: '16%',
-            memory: '46%'
-          }
-        ]
-      }
-    },
-    methods: {
-      handleEdit(index, row) {
-        console.log(index, row)
-
-        // const {href} = this.$router.resolve({
-        //   path: `/backstage/hosts/${row.id}`
-        // })
-
-        // window.open(href, '_blank')
-
-        this.$router.push({
-          path: `/backstage/hosts/${row.id}`
-        })
-      },
-      handleDelete(index, row) {
-        console.log(index, row)
-      },
-      tableRowClassName({row, rowIndex}) {
-        if (rowIndex === 1) {
-          return 'warning-row'
-        } else if (rowIndex === 3) {
-          return 'success-row'
+export default {
+  mounted() {},
+  data() {
+    return {
+      value1: false,
+      // tableHeight: document.documentElement.clientHeight - 335,
+      multipleSelection: [],
+      vpsData: [
+        {
+          id: "15ASS11",
+          ip: "112.225.212.221",
+          nodecount: 16,
+          cpu: "16%",
+          memory: "46%"
         }
-        return ''
-      },
-      aaa() {
-        console.log(this.multipleSelection)
-      },
-      ...mapMutations({
-        setNavActive: 'setNavActive',
-        setBreadcrumb: 'setBreadcrumb'
-      }),
-    },
-    created() {
-      this.setNavActive('2');
+      ]
+    };
+  },
+  methods: {
+    handleEdit(index, row) {
+      console.log(index, row);
 
-      this.setBreadcrumb(Hosts)
-    }
+      // const {href} = this.$router.resolve({
+      //   path: `/backstage/hosts/${row.id}`
+      // })
+
+      // window.open(href, '_blank')
+
+      this.$router.push({
+        path: `/backstage/hosts/${row.id}`
+      });
+    },
+    handleDelete(index, row) {
+      console.log(index, row);
+    },
+    tableRowClassName({ row, rowIndex }) {
+      if (rowIndex === 1) {
+        return "warning-row";
+      } else if (rowIndex === 3) {
+        return "success-row";
+      }
+      return "";
+    },
+    aaa() {
+      console.log(this.multipleSelection);
+    },
+    ...mapMutations({
+      setNavActive: "setNavActive",
+      setBreadcrumb: "setBreadcrumb"
+    })
+  },
+  created() {
+    this.setNavActive("2");
+
+    this.setBreadcrumb(Hosts);
   }
+};
 </script>
 
 <style lang="scss" scoped>
-  #gn {
+#gn {
+  .detailInfo {
+    font-size: 0.9rem;
 
-    .detailInfo {
-      font-size: .9rem;
-
-      .grid-content {
-        margin-bottom: 5px;
-      }
+    .grid-content {
+      margin-bottom: 5px;
     }
   }
+}
 
-  .el-table .warning-row {
-    background: oldlace;
-  }
+.el-table .warning-row {
+  background: oldlace;
+}
 
-  .el-table .success-row {
-    background: #f0f9eb;
-  }
+.el-table .success-row {
+  background: #f0f9eb;
+}
 </style>

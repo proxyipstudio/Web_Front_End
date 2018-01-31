@@ -1,12 +1,9 @@
-export const GatherNodes = [
-  {
-    text: '扫描节点',
-    route: ''
-  }
-]
+export const GatherNodes = [{
+  text: '扫描节点',
+  route: ''
+}];
 
-export const Hosts = [
-  {
+export const Hosts = [{
     text: '主机相关',
     route: '/backstage/hosts'
   },
@@ -14,10 +11,9 @@ export const Hosts = [
     text: '主机信息',
     route: ''
   }
-]
+];
 
-export const HostInfomation = [
-  {
+export const HostInfomation = [{
     text: '主机相关',
     route: '/backstage/hosts'
   },
@@ -29,17 +25,14 @@ export const HostInfomation = [
     text: '主机详情',
     route: ''
   }
-]
+];
 
-export const Dashboard = [
-  {
-    text: '信息汇总',
-    route: ''
-  }
-]
+export const Dashboard = [{
+  text: '信息汇总',
+  route: ''
+}];
 
-export const Users = [
-  {
+export const Users = [{
     text: '用户',
     route: ''
   },
@@ -47,10 +40,9 @@ export const Users = [
     text: '用户列表',
     route: '/backstage/users'
   }
-]
+];
 
-export const Earning = [
-  {
+export const Earning = [{
     text: '营收相关',
     route: ''
   },
@@ -58,10 +50,9 @@ export const Earning = [
     text: '营收情况',
     route: '/backstage/earning'
   }
-]
+];
 
-export const Orders = [
-  {
+export const Orders = [{
     text: '营收相关',
     route: ''
   },
@@ -69,24 +60,19 @@ export const Orders = [
     text: '历史订单',
     route: '/backstage/orders'
   }
-]
+];
 
-export const Stat = [
-  {
-    text: '统计',
-    route: ''
-  }
-]
+export const Stat = [{
+  text: '统计',
+  route: ''
+}];
 
-export const AccountSettings = [
-  {
-    text: '账户设置',
-    route: ''
-  }
-]
+export const AccountSettings = [{
+  text: '账户设置',
+  route: ''
+}];
 
-export const CheckConfiguration = [
-  {
+export const CheckConfiguration = [{
     text: '配置项',
     route: ''
   },
@@ -94,10 +80,9 @@ export const CheckConfiguration = [
     text: '校验表',
     route: '/backstage/checkconfiguration'
   }
-]
+];
 
-export const RuleConfiguration = [
-  {
+export const RuleConfiguration = [{
     text: '配置项',
     route: ''
   },
@@ -105,4 +90,4 @@ export const RuleConfiguration = [
     text: '规则表',
     route: '/backstage/ruleconfiguration'
   }
-]
+];

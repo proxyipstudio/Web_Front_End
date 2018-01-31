@@ -81,32 +81,27 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
   methods: {
     handleOpen(key, keyPath) {
-      console.log(key, keyPath)
+      console.log(key, keyPath);
     },
     handleClose(key, keyPath) {
-      console.log(key, keyPath)
+      console.log(key, keyPath);
     },
     goto(route) {
-      this.$router.push(route)
+      this.$router.push(route);
     }
   },
   data() {
-    return {
-
-    }
+    return {};
   },
   computed: {
-    ...mapGetters([
-      'curNavActive'
-    ])
+    ...mapGetters(["curNavActive"])
   }
-}
-
+};
 </script>
 
 <style lang="scss" scoped>
@@ -116,5 +111,4 @@ export default {
   height: 100%;
   width: 208px;
 }
-
 </style>

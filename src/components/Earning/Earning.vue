@@ -63,66 +63,68 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
-import { Earning } from '../../common/config/breadcrumb'
+import { mapMutations } from "vuex";
+import { Earning } from "../../common/config/breadcrumb";
 
 export default {
   data() {
     return {
-      tableData: [{
-        id: '12312',
-        buyer: '1234232221',
-        type: '套餐1',
-        pay: '¥1123',
-        date: '22:11:33'
-      },{
-        id: '12312',
-        buyer: '1234232221',
-        type: '套餐1',
-        pay: '¥1123',
-        date: '22:11:33'
-      },{
-        id: '12312',
-        buyer: '1234232221',
-        type: '套餐1',
-        pay: '¥1123',
-        date: '22:11:33'
-      }]
-    }
+      tableData: [
+        {
+          id: "12312",
+          buyer: "1234232221",
+          type: "套餐1",
+          pay: "¥1123",
+          date: "22:11:33"
+        },
+        {
+          id: "12312",
+          buyer: "1234232221",
+          type: "套餐1",
+          pay: "¥1123",
+          date: "22:11:33"
+        },
+        {
+          id: "12312",
+          buyer: "1234232221",
+          type: "套餐1",
+          pay: "¥1123",
+          date: "22:11:33"
+        }
+      ]
+    };
   },
   methods: {
     ...mapMutations({
-      setNavActive: 'setNavActive',
-      setBreadcrumb: 'setBreadcrumb'
-    }),
+      setNavActive: "setNavActive",
+      setBreadcrumb: "setBreadcrumb"
+    })
   },
   created() {
-    this.setNavActive('4-1')
+    this.setNavActive("4-1");
 
-    this.setBreadcrumb(Earning)
+    this.setBreadcrumb(Earning);
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  @import '../../assets/scss/variable.scss';
+@import "../../assets/scss/variable.scss";
 
-  #earning {
+#earning {
+  .alertpanel {
+    .title {
+      font-size: 1.3rem;
+      padding-bottom: 10px;
+      color: $white;
+      font-weight: 700;
+    }
 
-    .alertpanel{
-
-      .title {
-        font-size: 1.3rem;
-        padding-bottom: 10px;
-        color: $white;
-        font-weight: 700;
-      }
-
-      .content {
-        font-size: 1.1rem;
-        color: $white;
-        font-weight: 200;
-      }
+    .content {
+      font-size: 1.1rem;
+      color: $white;
+      font-weight: 200;
     }
   }
+}
 </style>

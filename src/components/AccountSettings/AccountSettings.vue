@@ -23,47 +23,46 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
-import { AccountSettings } from '../../common/config/breadcrumb'
+import { mapMutations } from "vuex";
+import { AccountSettings } from "../../common/config/breadcrumb";
 
 export default {
   data() {
     return {
-      activeName: 'second',
+      activeName: "second",
       form: {
-        oldpwd: '',
-        newpwd: '',
-        confirmNewpwd: ''
+        oldpwd: "",
+        newpwd: "",
+        confirmNewpwd: ""
       },
       canUpdate: true
-    }
+    };
   },
   methods: {
     ...mapMutations({
-      setNavActive: 'setNavActive',
-      setBreadcrumb: 'setBreadcrumb'
+      setNavActive: "setNavActive",
+      setBreadcrumb: "setBreadcrumb"
     }),
-    handleClick() {
-      
-    },
+    handleClick() {},
     checkSame() {
-      if (this.form.newpwd === '' && this.form.confirmNewpwd === '') return this.canUpdate = false
-      if (this.form.newpwd === this.form.confirmNewpwd){
-        this.canUpdate = false
-        return
+      if (this.form.newpwd === "" && this.form.confirmNewpwd === "")
+        return (this.canUpdate = false);
+      if (this.form.newpwd === this.form.confirmNewpwd) {
+        this.canUpdate = false;
+        return;
       }
-      this.canUpdate = true
+      this.canUpdate = true;
       this.$notify({
-        title: '警告',
-        message: '两次输入密码不同',
-        type: 'warning'
-      })
+        title: "警告",
+        message: "两次输入密码不同",
+        type: "warning"
+      });
     }
   },
   created() {
-    this.setNavActive('7')
+    this.setNavActive("7");
 
-    this.setBreadcrumb(AccountSettings)
+    this.setBreadcrumb(AccountSettings);
   }
-}
+};
 </script>

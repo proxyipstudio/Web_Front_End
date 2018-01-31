@@ -76,96 +76,96 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
-import { Orders } from '../../common/config/breadcrumb'
+import { mapMutations } from "vuex";
+import { Orders } from "../../common/config/breadcrumb";
 
 export default {
   data() {
     return {
-      input5: '',
-      select: '',
+      input5: "",
+      select: "",
       tableHeight: document.documentElement.clientHeight - 285,
       multipleSelection: [],
       curGatherNodeInfo: null,
       gnData: [
         {
-          id: '12312',
-          buyer: '12332122231',
-          type: '套餐1',
-          pay: '¥1123',
-          date: '2013-11-32 22:11:23'
+          id: "12312",
+          buyer: "12332122231",
+          type: "套餐1",
+          pay: "¥1123",
+          date: "2013-11-32 22:11:23"
         },
         {
-          id: '12312',
-          buyer: '12332122231',
-          type: '套餐1',
-          pay: '¥1123',
-          date: '2013-11-32 22:11:23'
+          id: "12312",
+          buyer: "12332122231",
+          type: "套餐1",
+          pay: "¥1123",
+          date: "2013-11-32 22:11:23"
         },
         {
-          id: '12312',
-          buyer: '12332122231',
-          type: '套餐1',
-          pay: '¥1123',
-          date: '2013-11-32 22:11:23'
+          id: "12312",
+          buyer: "12332122231",
+          type: "套餐1",
+          pay: "¥1123",
+          date: "2013-11-32 22:11:23"
         },
         {
-          id: '12312',
-          buyer: '12332122231',
-          type: '套餐1',
-          pay: '¥1123',
-          date: '2013-11-32 22:11:23'
+          id: "12312",
+          buyer: "12332122231",
+          type: "套餐1",
+          pay: "¥1123",
+          date: "2013-11-32 22:11:23"
         },
         {
-          id: '12312',
-          buyer: '12332122231',
-          type: '套餐1',
-          pay: '¥1123',
-          date: '2013-11-32 22:11:23'
+          id: "12312",
+          buyer: "12332122231",
+          type: "套餐1",
+          pay: "¥1123",
+          date: "2013-11-32 22:11:23"
         },
         {
-          id: '12312',
-          buyer: '12332122231',
-          type: '套餐1',
-          pay: '¥1123',
-          date: '2013-11-32 22:11:23'
+          id: "12312",
+          buyer: "12332122231",
+          type: "套餐1",
+          pay: "¥1123",
+          date: "2013-11-32 22:11:23"
         },
         {
-          id: '12312',
-          buyer: '12332122231',
-          type: '套餐1',
-          pay: '¥1123',
-          date: '2013-11-32 22:11:23'
+          id: "12312",
+          buyer: "12332122231",
+          type: "套餐1",
+          pay: "¥1123",
+          date: "2013-11-32 22:11:23"
         },
         {
-          id: '12312',
-          buyer: '12332122231',
-          type: '套餐1',
-          pay: '¥1123',
-          date: '2013-11-32 22:11:23'
+          id: "12312",
+          buyer: "12332122231",
+          type: "套餐1",
+          pay: "¥1123",
+          date: "2013-11-32 22:11:23"
         },
         {
-          id: '12312',
-          buyer: '12332122231',
-          type: '套餐1',
-          pay: '¥1123',
-          date: '2013-11-32 22:11:23'
+          id: "12312",
+          buyer: "12332122231",
+          type: "套餐1",
+          pay: "¥1123",
+          date: "2013-11-32 22:11:23"
         }
       ]
-    }
+    };
   },
   methods: {
     ...mapMutations({
-      setNavActive: 'setNavActive',
-      setBreadcrumb: 'setBreadcrumb'
-    }),
+      setNavActive: "setNavActive",
+      setBreadcrumb: "setBreadcrumb"
+    })
   },
   created() {
-    this.setNavActive('4-2')
+    this.setNavActive("4-2");
 
-    this.setBreadcrumb(Orders)
+    this.setBreadcrumb(Orders);
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

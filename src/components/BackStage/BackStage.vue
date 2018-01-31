@@ -24,7 +24,7 @@
 <script>
 import NavBar from "@/components/Nav/Nav";
 import NavHeader from "@/components/Header/Header";
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -32,14 +32,12 @@ export default {
     NavBar
   },
   data() {
-    return {}
+    return {};
   },
   computed: {
-    ...mapGetters([
-      'breadcrumb'
-    ])
+    ...mapGetters(["breadcrumb"])
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

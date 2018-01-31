@@ -281,8 +281,8 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
-import { HostInfomation } from '../../common/config/breadcrumb'
+import { mapMutations } from "vuex";
+import { HostInfomation } from "../../common/config/breadcrumb";
 
 export default {
   data() {
@@ -293,100 +293,98 @@ export default {
         using: 1322
       },
       memoryrate: 22,
-      memorybarstatus: 'success',
+      memorybarstatus: "success",
       gnData: [
         {
-          id: '1112',
-          version: '12',
-          programname: '呱呱',
-          runtime: '199s',
-          starttime: '2017-1-1',
-          scanrate: '33/s',
-          scancount: '998',
-          hostip: '127.0.1.2',
-          hostid: '9'
+          id: "1112",
+          version: "12",
+          programname: "呱呱",
+          runtime: "199s",
+          starttime: "2017-1-1",
+          scanrate: "33/s",
+          scancount: "998",
+          hostip: "127.0.1.2",
+          hostid: "9"
         },
         {
-          id: '1112',
-          version: '12',
-          programname: '呱呱',
-          runtime: '199s',
-          starttime: '2017-1-1',
-          scanrate: '33/s',
-          scancount: '998',
-          hostip: '127.0.1.2',
-          hostid: '9'
+          id: "1112",
+          version: "12",
+          programname: "呱呱",
+          runtime: "199s",
+          starttime: "2017-1-1",
+          scanrate: "33/s",
+          scancount: "998",
+          hostip: "127.0.1.2",
+          hostid: "9"
         },
         {
-          id: '1112',
-          version: '12',
-          programname: '呱呱',
-          runtime: '199s',
-          starttime: '2017-1-1',
-          scanrate: '33/s',
-          scancount: '998',
-          hostip: '127.0.1.2',
-          hostid: '9'
+          id: "1112",
+          version: "12",
+          programname: "呱呱",
+          runtime: "199s",
+          starttime: "2017-1-1",
+          scanrate: "33/s",
+          scancount: "998",
+          hostip: "127.0.1.2",
+          hostid: "9"
         },
         {
-          id: '1112',
-          version: '12',
-          programname: '呱呱',
-          runtime: '199s',
-          starttime: '2017-1-1',
-          scanrate: '33/s',
-          scancount: '998',
-          hostip: '127.0.1.2',
-          hostid: '9'
+          id: "1112",
+          version: "12",
+          programname: "呱呱",
+          runtime: "199s",
+          starttime: "2017-1-1",
+          scanrate: "33/s",
+          scancount: "998",
+          hostip: "127.0.1.2",
+          hostid: "9"
         },
         {
-          id: '1112',
-          version: '12',
-          programname: '呱呱',
-          runtime: '199s',
-          starttime: '2017-1-1',
-          scanrate: '33/s',
-          scancount: '998',
-          hostip: '127.0.1.2',
-          hostid: '9'
+          id: "1112",
+          version: "12",
+          programname: "呱呱",
+          runtime: "199s",
+          starttime: "2017-1-1",
+          scanrate: "33/s",
+          scancount: "998",
+          hostip: "127.0.1.2",
+          hostid: "9"
         },
         {
-          id: '1112',
-          version: '12',
-          programname: '呱呱',
-          runtime: '199s',
-          starttime: '2017-1-1',
-          scanrate: '33/s',
-          scancount: '998',
-          hostip: '127.0.1.2',
-          hostid: '9'
+          id: "1112",
+          version: "12",
+          programname: "呱呱",
+          runtime: "199s",
+          starttime: "2017-1-1",
+          scanrate: "33/s",
+          scancount: "998",
+          hostip: "127.0.1.2",
+          hostid: "9"
         }
       ]
-    }
+    };
   },
   methods: {
-  ...mapMutations({
-      setNavActive: 'setNavActive',
-      setBreadcrumb: 'setBreadcrumb'
-    }),
+    ...mapMutations({
+      setNavActive: "setNavActive",
+      setBreadcrumb: "setBreadcrumb"
+    })
   },
   created() {
-    this.setNavActive('2')
+    this.setNavActive("2");
     setInterval(() => {
+      let using = parseInt(Math.random() * 8192);
 
-      let using = parseInt(Math.random() * 8192)
+      let rate = parseInt(using / this.memory.total * 100);
 
-      let rate = parseInt(using / this.memory.total * 100)
+      this.memory.using = using;
+      this.memoryrate = rate;
+      this.memorybarstatus = rate > 75 ? "exception" : "success";
+    }, 2000);
 
-      this.memory.using = using
-      this.memoryrate = rate
-      this.memorybarstatus = rate > 75 ? 'exception' : 'success'
-
-    }, 2000)
-
-    this.setBreadcrumb(HostInfomation)
+    this.setBreadcrumb(HostInfomation);
   }
-}
+};
 </script>
 
 

@@ -8,6 +8,6 @@ const mutations = {
   setBreadcrumb(state, bread) {
     state.breadcrumb = bread
   }
-}
+};
 
-export default mutations
+export default mutations;

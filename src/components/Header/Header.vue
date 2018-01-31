@@ -19,26 +19,23 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
   methods: {
     logout() {
       this.$router.push({
-        path: '/login'
-      })
+        path: "/login"
+      });
     }
   },
-  mounted () {
+  mounted() {
     console.log(this.curUsrName);
   },
   computed: {
-    ...mapGetters([
-      'curUsrName'
-    ])
+    ...mapGetters(["curUsrName"])
   }
-  
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -78,7 +75,7 @@ export default {
       &:hover {
         background-color: $deep-blue;
       }
-      
+
       &:first-child {
         &:hover {
           background-color: transparent;

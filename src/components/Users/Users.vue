@@ -106,8 +106,8 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
-import { Users } from '../../common/config/breadcrumb'
+import { mapMutations } from "vuex";
+import { Users } from "../../common/config/breadcrumb";
 
 export default {
   mounted() {},
@@ -160,17 +160,21 @@ export default {
           email: "fdaslkdf@qq.cc"
         }
       ],
-      options: [{
-        value: '选项1',
-        label: '节点相关'
-      }, {
-        value: '选项2',
-        label: '主机相关'
-      }, {
-        value: '选项3',
-        label: '用户相关'
-      }],
-      value5: [],
+      options: [
+        {
+          value: "选项1",
+          label: "节点相关"
+        },
+        {
+          value: "选项2",
+          label: "主机相关"
+        },
+        {
+          value: "选项3",
+          label: "用户相关"
+        }
+      ],
+      value5: []
     };
   },
   methods: {
@@ -178,16 +182,16 @@ export default {
       // console.log(index, row);
       const loading = this.$loading({
         lock: true,
-        text: '请求中...',
-        background: 'rgba(0, 0, 0, 0.7)'
+        text: "请求中...",
+        background: "rgba(0, 0, 0, 0.7)"
       });
       setTimeout(() => {
         loading.close();
         this.$notify.error({
-          title: '提示',
-          message: '请求失败'
+          title: "提示",
+          message: "请求失败"
         });
-      }, 1000)
+      }, 1000);
     },
     handleDelete(index, row) {
       console.log(index, row);
@@ -210,17 +214,15 @@ export default {
       console.log("submit!");
     },
     ...mapMutations({
-      setNavActive: 'setNavActive',
-      setBreadcrumb: 'setBreadcrumb'
+      setNavActive: "setNavActive",
+      setBreadcrumb: "setBreadcrumb"
     }),
-    handleClick() {
-
-    }
+    handleClick() {}
   },
   created() {
-    this.setNavActive('3')
+    this.setNavActive("3");
 
-    this.setBreadcrumb(Users)
+    this.setBreadcrumb(Users);
   }
 };
 </script>

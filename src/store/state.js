@@ -4,4 +4,4 @@ const state = {
   breadcrumb: []
 };
 
-export default state
+export default state;

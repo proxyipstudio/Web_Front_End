@@ -13,29 +13,29 @@
 import NavHeader from "@/components/Header/Header";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     NavHeader
   }
-}
+};
 </script>
 
 <style lang="scss">
-  @import './assets/scss/base.scss';
-  @import './assets/scss/variable.scss';
+@import "./assets/scss/base.scss";
+@import "./assets/scss/variable.scss";
 
-  #nav-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 5;
-    width: 100%;
-    background-color: $blue;
-  }
+#nav-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 100%;
+  background-color: $blue;
+}
 
-  #app {
-    width: 1200px;
-    height: 100%;
-    margin: 0 auto;
-  }
+#app {
+  width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+}
 </style>

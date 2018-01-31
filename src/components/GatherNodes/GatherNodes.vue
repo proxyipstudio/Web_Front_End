@@ -289,239 +289,236 @@
 </template>
 
 <script>
-  import { mapMutations } from 'vuex'
-  import { GatherNodes } from '../../common/config/breadcrumb'
+import { mapMutations } from "vuex";
+import { GatherNodes } from "../../common/config/breadcrumb";
 
-  export default {
-    mounted () {
-      
-    },
-    data() {
-      return {
-        value1: false,
-        tableHeight: document.documentElement.clientHeight - 335,
-        multipleSelection: [],
-        curGatherNodeInfo: null,
-        gnData: [
-          {
-            id: 112,
-            version: '12',
-            programname: '呱呱',
-            runtime: '199s',
-            starttime: '2017-1-1',
-            scanrate: '33/s',
-            scancount: '998',
-            hostip: '127.0.1.2',
-            hostid: '9'
-          },
-          {
-            id: 112,
-            version: '12',
-            programname: '呱呱',
-            runtime: '199s',
-            starttime: '2017-1-1',
-            scanrate: '38/s',
-            scancount: '998',
-            hostip: '127.0.1.2',
-            hostid: '9'
-          },
-          {
-            id: 112,
-            version: '12',
-            programname: '呱呱',
-            runtime: '199s',
-            starttime: '2017-1-1',
-            scanrate: '33/s',
-            scancount: '998',
-            hostip: '127.0.1.2',
-            hostid: '9'
-          },
-          {
-            id: 112,
-            version: '12',
-            programname: '呱呱',
-            runtime: '199s',
-            starttime: '2017-1-1',
-            scanrate: '33/s',
-            scancount: '998',
-            hostip: '127.0.1.2',
-            hostid: '9'
-          },
-          {
-            id: 112,
-            version: '12',
-            programname: '呱呱',
-            runtime: '199s',
-            starttime: '2017-1-1',
-            scanrate: '33/s',
-            scancount: '998',
-            hostip: '127.0.1.2',
-            hostid: '9'
-          },
-          {
-            id: 112,
-            version: '12',
-            programname: '呱呱',
-            runtime: '199s',
-            starttime: '2017-1-1',
-            scanrate: '33/s',
-            scancount: '998',
-            hostip: '127.0.1.2',
-            hostid: '9'
-          },
-          {
-            id: 112,
-            version: '12',
-            programname: '呱呱',
-            runtime: '199s',
-            starttime: '2017-1-1',
-            scanrate: '33/s',
-            scancount: '998',
-            hostip: '127.0.1.2',
-            hostid: '9'
-          },
-          {
-            id: 112,
-            version: '12',
-            programname: '呱呱',
-            runtime: '199s',
-            starttime: '2017-1-1',
-            scanrate: '33/s',
-            scancount: '998',
-            hostip: '127.0.1.2',
-            hostid: '9'
-          },
-          {
-            id: 112,
-            version: '12',
-            programname: '呱呱',
-            runtime: '199s',
-            starttime: '2017-1-1',
-            scanrate: '33/s',
-            scancount: '998',
-            hostip: '127.0.1.2',
-            hostid: '9'
-          },
-          {
-            id: 112,
-            version: '12',
-            programname: '呱呱',
-            runtime: '199s',
-            starttime: '2017-1-1',
-            scanrate: '33/s',
-            scancount: '998',
-            hostip: '127.0.1.2',
-            hostid: '9'
-          },
-          {
-            id: 112,
-            version: '12',
-            programname: '呱呱',
-            runtime: '199s',
-            starttime: '2017-1-1',
-            scanrate: '33/s',
-            scancount: '998',
-            hostip: '127.0.1.2',
-            hostid: '9'
-          },
-          {
-            id: 112,
-            version: '12',
-            programname: '呱呱',
-            runtime: '199s',
-            starttime: '2017-1-1',
-            scanrate: '33/s',
-            scancount: '998',
-            hostip: '127.0.1.2',
-            hostid: '9'
-          },
-          {
-            id: 112,
-            version: '12',
-            programname: '呱呱',
-            runtime: '199s',
-            starttime: '2017-1-1',
-            scanrate: '33/s',
-            scancount: '998',
-            hostip: '127.0.1.2',
-            hostid: '9'
-          },
-          {
-            id: 112,
-            version: '12',
-            programname: '呱呱',
-            runtime: '199s',
-            starttime: '2017-1-1',
-            scanrate: '33/s',
-            scancount: '998',
-            hostip: '127.0.1.2',
-            hostid: '9'
-          }
-        ]
-      }
-    },
-    methods: {
-      handleEdit(index, row) {
-        console.log(index, row)
-        this.curGatherNodeInfo = {
+export default {
+  mounted() {},
+  data() {
+    return {
+      value1: false,
+      tableHeight: document.documentElement.clientHeight - 335,
+      multipleSelection: [],
+      curGatherNodeInfo: null,
+      gnData: [
+        {
           id: 112,
-          version: '12',
-          programname: '呱呱',
-          runtime: '199s',
-          starttime: '2017-1-1',
-          scanrate: '33/s',
-          scancount: '998',
-          hostip: '127.0.1.2',
-          hostid: '9'
+          version: "12",
+          programname: "呱呱",
+          runtime: "199s",
+          starttime: "2017-1-1",
+          scanrate: "33/s",
+          scancount: "998",
+          hostip: "127.0.1.2",
+          hostid: "9"
+        },
+        {
+          id: 112,
+          version: "12",
+          programname: "呱呱",
+          runtime: "199s",
+          starttime: "2017-1-1",
+          scanrate: "38/s",
+          scancount: "998",
+          hostip: "127.0.1.2",
+          hostid: "9"
+        },
+        {
+          id: 112,
+          version: "12",
+          programname: "呱呱",
+          runtime: "199s",
+          starttime: "2017-1-1",
+          scanrate: "33/s",
+          scancount: "998",
+          hostip: "127.0.1.2",
+          hostid: "9"
+        },
+        {
+          id: 112,
+          version: "12",
+          programname: "呱呱",
+          runtime: "199s",
+          starttime: "2017-1-1",
+          scanrate: "33/s",
+          scancount: "998",
+          hostip: "127.0.1.2",
+          hostid: "9"
+        },
+        {
+          id: 112,
+          version: "12",
+          programname: "呱呱",
+          runtime: "199s",
+          starttime: "2017-1-1",
+          scanrate: "33/s",
+          scancount: "998",
+          hostip: "127.0.1.2",
+          hostid: "9"
+        },
+        {
+          id: 112,
+          version: "12",
+          programname: "呱呱",
+          runtime: "199s",
+          starttime: "2017-1-1",
+          scanrate: "33/s",
+          scancount: "998",
+          hostip: "127.0.1.2",
+          hostid: "9"
+        },
+        {
+          id: 112,
+          version: "12",
+          programname: "呱呱",
+          runtime: "199s",
+          starttime: "2017-1-1",
+          scanrate: "33/s",
+          scancount: "998",
+          hostip: "127.0.1.2",
+          hostid: "9"
+        },
+        {
+          id: 112,
+          version: "12",
+          programname: "呱呱",
+          runtime: "199s",
+          starttime: "2017-1-1",
+          scanrate: "33/s",
+          scancount: "998",
+          hostip: "127.0.1.2",
+          hostid: "9"
+        },
+        {
+          id: 112,
+          version: "12",
+          programname: "呱呱",
+          runtime: "199s",
+          starttime: "2017-1-1",
+          scanrate: "33/s",
+          scancount: "998",
+          hostip: "127.0.1.2",
+          hostid: "9"
+        },
+        {
+          id: 112,
+          version: "12",
+          programname: "呱呱",
+          runtime: "199s",
+          starttime: "2017-1-1",
+          scanrate: "33/s",
+          scancount: "998",
+          hostip: "127.0.1.2",
+          hostid: "9"
+        },
+        {
+          id: 112,
+          version: "12",
+          programname: "呱呱",
+          runtime: "199s",
+          starttime: "2017-1-1",
+          scanrate: "33/s",
+          scancount: "998",
+          hostip: "127.0.1.2",
+          hostid: "9"
+        },
+        {
+          id: 112,
+          version: "12",
+          programname: "呱呱",
+          runtime: "199s",
+          starttime: "2017-1-1",
+          scanrate: "33/s",
+          scancount: "998",
+          hostip: "127.0.1.2",
+          hostid: "9"
+        },
+        {
+          id: 112,
+          version: "12",
+          programname: "呱呱",
+          runtime: "199s",
+          starttime: "2017-1-1",
+          scanrate: "33/s",
+          scancount: "998",
+          hostip: "127.0.1.2",
+          hostid: "9"
+        },
+        {
+          id: 112,
+          version: "12",
+          programname: "呱呱",
+          runtime: "199s",
+          starttime: "2017-1-1",
+          scanrate: "33/s",
+          scancount: "998",
+          hostip: "127.0.1.2",
+          hostid: "9"
         }
-      },
-      handleDelete(index, row) {
-        console.log(index, row)
-      },
-      tableRowClassName({row, rowIndex}) {
-        if (rowIndex === 1) {
-          return 'warning-row';
-        } else if (rowIndex === 3) {
-          return 'success-row'
-        }
-        return ''
-      },
-      aaa() {
-        console.log(this.multipleSelection)
-      },
-      handleSelectionChange(val) {
-        this.multipleSelection = val
-      },
-      ...mapMutations({
-        setNavActive: 'setNavActive',
-        setBreadcrumb: 'setBreadcrumb'
-      }),
+      ]
+    };
+  },
+  methods: {
+    handleEdit(index, row) {
+      console.log(index, row);
+      this.curGatherNodeInfo = {
+        id: 112,
+        version: "12",
+        programname: "呱呱",
+        runtime: "199s",
+        starttime: "2017-1-1",
+        scanrate: "33/s",
+        scancount: "998",
+        hostip: "127.0.1.2",
+        hostid: "9"
+      };
     },
-    created() {
-      this.setNavActive('1');
-      
-      this.setBreadcrumb(GatherNodes)
-    }
+    handleDelete(index, row) {
+      console.log(index, row);
+    },
+    tableRowClassName({ row, rowIndex }) {
+      if (rowIndex === 1) {
+        return "warning-row";
+      } else if (rowIndex === 3) {
+        return "success-row";
+      }
+      return "";
+    },
+    aaa() {
+      console.log(this.multipleSelection);
+    },
+    handleSelectionChange(val) {
+      this.multipleSelection = val;
+    },
+    ...mapMutations({
+      setNavActive: "setNavActive",
+      setBreadcrumb: "setBreadcrumb"
+    })
+  },
+  created() {
+    this.setNavActive("1");
+
+    this.setBreadcrumb(GatherNodes);
   }
+};
 </script>
 
 <style lang="scss" scoped>
-  #gn {
+#gn {
+  .detailInfo {
+    font-size: 0.9rem;
 
-    .detailInfo {
-      font-size: .9rem;
-
-      .grid-content {
-        margin-bottom: 5px;
-      }
+    .grid-content {
+      margin-bottom: 5px;
     }
   }
+}
 
-  .el-table .warning-row {
-    background: oldlace;
-  }
+.el-table .warning-row {
+  background: oldlace;
+}
 
-  .el-table .success-row {
-    background: #f0f9eb;
-  }
+.el-table .success-row {
+  background: #f0f9eb;
+}
 </style>

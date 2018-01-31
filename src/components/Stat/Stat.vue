@@ -18,28 +18,31 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
-import { Stat } from '../../common/config/breadcrumb'
+import { mapMutations } from "vuex";
+import { Stat } from "../../common/config/breadcrumb";
 
 const data = [
-  { year: '1991', value: 3 },
-  { year: '1992', value: 4 },
-  { year: '1993', value: 3.5 },
-  { year: '1994', value: 5 },
-  { year: '1995', value: 4.9 },
-  { year: '1996', value: 6 },
-  { year: '1997', value: 7 },
-  { year: '1998', value: 9 }
+  { year: "1991", value: 3 },
+  { year: "1992", value: 4 },
+  { year: "1993", value: 3.5 },
+  { year: "1994", value: 5 },
+  { year: "1995", value: 4.9 },
+  { year: "1996", value: 6 },
+  { year: "1997", value: 7 },
+  { year: "1998", value: 9 }
 ];
 
-const scale = [{
-  dataKey: '值',
-  min: 0,
-},{
-  dataKey: 'year',
-  min: 0,
-  max: 1,
-}];
+const scale = [
+  {
+    dataKey: "值",
+    min: 0
+  },
+  {
+    dataKey: "year",
+    min: 0,
+    max: 1
+  }
+];
 
 export default {
   data() {
@@ -47,22 +50,20 @@ export default {
       data,
       scale,
       height: 400,
-      tab: 'first'
-    }
+      tab: "first"
+    };
   },
   methods: {
     ...mapMutations({
-      setNavActive: 'setNavActive',
-      setBreadcrumb: 'setBreadcrumb'
+      setNavActive: "setNavActive",
+      setBreadcrumb: "setBreadcrumb"
     }),
-    handleClick() {
-
-    }
+    handleClick() {}
   },
   created() {
-    this.setNavActive('6')
+    this.setNavActive("6");
 
-    this.setBreadcrumb(Stat)
+    this.setBreadcrumb(Stat);
   }
-}
+};
 </script>
