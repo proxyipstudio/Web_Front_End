@@ -15,6 +15,12 @@
           <el-card class="box-card" body-style="padding: 0;">
             <div slot="header" class="clearfix">
               <span>扫描节点列表</span>
+              <div style="float: right; padding: 3px 0">
+                <span style="color: #409EFF; cursor: pointer;"><i class="el-icon-check"></i>&nbsp;校验节点</span>
+                &emsp;
+                <span style="color: #409EFF; cursor: pointer;"><i class="el-icon-check" v-if="false"></i>&nbsp;采集节点</span>
+              </div>
+             
             </div>
             <el-table
             :data="gnData"

@@ -57,11 +57,11 @@
           <el-submenu index="5">
             <template slot="title">
               <i class="fa fa-navicon"></i>
-              <span>配置项</span>
+              <span>规则配置</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="5-1" @click="goto('/backstage/ruleconfiguration')">规则表</el-menu-item>
-              <el-menu-item index="5-2" @click="goto('/backstage/checkconfiguration')">校验表</el-menu-item>
+              <el-menu-item index="5-1" @click="goto('/backstage/ruleconfiguration')">采集规则</el-menu-item>
+              <el-menu-item index="5-2" @click="goto('/backstage/checkconfiguration')">校验规则</el-menu-item>
             </el-menu-item-group>
             
           </el-submenu>
