@@ -78,6 +78,9 @@
 <script>
 import { mapMutations } from "vuex";
 import { Orders } from "../../common/config/breadcrumb";
+import axios from 'axios';
+import API from '../../common/config/api';
+
 
 export default {
   data() {
@@ -101,55 +104,6 @@ export default {
           type: "套餐1",
           pay: "¥1123",
           date: "2013-11-32 22:11:23"
-        },
-        {
-          id: "12312",
-          buyer: "12332122231",
-          type: "套餐1",
-          pay: "¥1123",
-          date: "2013-11-32 22:11:23"
-        },
-        {
-          id: "12312",
-          buyer: "12332122231",
-          type: "套餐1",
-          pay: "¥1123",
-          date: "2013-11-32 22:11:23"
-        },
-        {
-          id: "12312",
-          buyer: "12332122231",
-          type: "套餐1",
-          pay: "¥1123",
-          date: "2013-11-32 22:11:23"
-        },
-        {
-          id: "12312",
-          buyer: "12332122231",
-          type: "套餐1",
-          pay: "¥1123",
-          date: "2013-11-32 22:11:23"
-        },
-        {
-          id: "12312",
-          buyer: "12332122231",
-          type: "套餐1",
-          pay: "¥1123",
-          date: "2013-11-32 22:11:23"
-        },
-        {
-          id: "12312",
-          buyer: "12332122231",
-          type: "套餐1",
-          pay: "¥1123",
-          date: "2013-11-32 22:11:23"
-        },
-        {
-          id: "12312",
-          buyer: "12332122231",
-          type: "套餐1",
-          pay: "¥1123",
-          date: "2013-11-32 22:11:23"
         }
       ]
     };
@@ -158,7 +112,21 @@ export default {
     ...mapMutations({
       setNavActive: "setNavActive",
       setBreadcrumb: "setBreadcrumb"
-    })
+    }),
+    aaa() {
+
+    }
+  },
+  async mounted () {
+    const res = await axios.post(API.GET_ORDER_LIST, {
+      pageIndex: 1,
+      pageNumber: 20
+    }); 
+
+    const data = res.data;
+
+    console.log(data);
+      
   },
   created() {
     this.setNavActive("4-2");

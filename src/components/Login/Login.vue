@@ -68,6 +68,8 @@
 
 <script>
 import { mapMutations } from "vuex";
+import axios from 'axios';
+import API from '../../common/config/api';
 
 export default {
   data() {
@@ -75,6 +77,9 @@ export default {
       usrname: "",
       pwd: ""
     };
+  },
+  async mounted() {
+
   },
   methods: {
     login() {

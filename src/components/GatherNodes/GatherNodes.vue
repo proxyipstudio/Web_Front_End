@@ -16,70 +16,135 @@
             <div slot="header" class="clearfix">
               <span>扫描节点列表</span>
               <div style="float: right; padding: 3px 0">
-                <span style="color: #409EFF; cursor: pointer;"><i class="el-icon-check"></i>&nbsp;校验节点</span>
+                <span style="color: #409EFF; cursor: pointer;" @click="curTable = 'check'"><span v-if="curTable === 'gather'">&emsp;</span><i class="el-icon-check" v-if="curTable === 'check'"></i>&nbsp;校验节点</span>
                 &emsp;
-                <span style="color: #409EFF; cursor: pointer;"><i class="el-icon-check" v-if="false"></i>&nbsp;采集节点</span>
+                <span style="color: #409EFF; cursor: pointer;" @click="curTable = 'gather'"><span v-if="curTable === 'check'">&emsp;</span><i class="el-icon-check" v-if="curTable === 'gather'"></i>&nbsp;采集节点</span>
               </div>
              
             </div>
-            <el-table
-            :data="gnData"
-            border
-            :height="tableHeight"
-            style="width: 100%; border: 0 none"
-            ref="gnTable"
-            @selection-change="handleSelectionChange"
-            :row-class-name="tableRowClassName">
-              <el-table-column
-                type="selection"
-                width="55"
-                prop="isrunning">
-              </el-table-column>
-              <el-table-column
-                prop="hostid"
-                width="100"
-                label="宿主机编号">
-              </el-table-column>
-              <el-table-column
-                prop="programname"
-                label="程序名称"
-                >
-              </el-table-column>
-              <el-table-column
-                prop="runtime"
-                label="运行时间"
-                >
-              </el-table-column>
-              <el-table-column
-                prop="scanrate"
-                sortable
-                width="120"
-                label="扫描速率">
-              </el-table-column>
-              <el-table-column
-                prop="scancount"
-                label="总扫描数">
-              </el-table-column>
-              <el-table-column label="操作">
-                <template slot-scope="scope">
-                  <el-button
-                    size="mini"
-                    type="primary"
-                    @click="handleEdit(scope.$index, scope.row)">详情</el-button>
-                </template>
-              </el-table-column>
-            </el-table>
+            
+            <div v-if="curTable === 'check'">
+              <el-table
+              :data="gnData"
+              border
+              :height="tableHeight"
+              style="width: 100%; border: 0 none"
+              ref="gnTable"
+              @selection-change="handleSelectionChange"
+              :row-class-name="tableRowClassName">
+                <el-table-column
+                  type="selection"
+                  width="55"
+                  prop="isrunning">
+                </el-table-column>
+                <el-table-column
+                  prop="hostid"
+                  width="100"
+                  label="宿主机编号">
+                </el-table-column>
+                <el-table-column
+                  prop="programname"
+                  label="程序名称"
+                  >
+                </el-table-column>
+                <el-table-column
+                  prop="runtime"
+                  label="运行时间"
+                  >
+                </el-table-column>
+                <el-table-column
+                  prop="scanrate"
+                  sortable
+                  width="120"
+                  label="扫描速率">
+                </el-table-column>
+                <el-table-column
+                  prop="scancount"
+                  label="总扫描数">
+                </el-table-column>
+                <el-table-column label="操作">
+                  <template slot-scope="scope">
+                    <el-button
+                      size="mini"
+                      type="primary"
+                      @click="handleEdit(scope.$index, scope.row)">详情</el-button>
+                  </template>
+                </el-table-column>
+              </el-table>
 
-            <div class="block" style="text-align: center;">
-              <el-pagination
-                @size-change="aaa"
-                @current-change="aaa"
-                :current-page="1"
-                :page-sizes="[10, 20, 40, 100]"
-                :page-size="20"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="400">
-              </el-pagination>
+              <div class="block" style="text-align: center;">
+                <el-pagination
+                  @size-change="aaa"
+                  @current-change="aaa"
+                  :current-page="1"
+                  :page-sizes="[10, 20, 40, 100]"
+                  :page-size="20"
+                  layout="total, sizes, prev, pager, next, jumper"
+                  :total="400">
+                </el-pagination>
+              </div>
+            </div>
+
+            <div v-if="curTable === 'gather'">
+              <el-table
+              :data="gnData"
+              border
+              :height="tableHeight"
+              style="width: 100%; border: 0 none"
+              ref="gnTable"
+              @selection-change="handleSelectionChange"
+              :row-class-name="tableRowClassName">
+                <el-table-column
+                  type="selection"
+                  width="55"
+                  prop="isrunning">
+                </el-table-column>
+                <el-table-column
+                  prop="hostid"
+                  width="100"
+                  label="宿主机编号">
+                </el-table-column>
+                <el-table-column
+                  prop="programname"
+                  label="程序名称"
+                  >
+                </el-table-column>
+                <el-table-column
+                  prop="runtime"
+                  label="运行时间"
+                  >
+                </el-table-column>
+                <el-table-column
+                  prop="scanrate"
+                  sortable
+                  width="120"
+                  label="我是菜鸡">
+                </el-table-column>
+                <el-table-column
+                  prop="scancount"
+                  label="总扫描数">
+                </el-table-column>
+                <el-table-column label="操作">
+                  <template slot-scope="scope">
+                    <el-button
+                      size="mini"
+                      type="primary"
+                      @click="handleEdit(scope.$index, scope.row)">详情</el-button>
+                  </template>
+                </el-table-column>
+              </el-table>
+
+              <div class="block" style="text-align: center;">
+                <el-pagination
+                  @size-change="aaa"
+                  @current-change="aaa"
+                  :current-page="1"
+                  :page-sizes="[10, 20, 40, 100]"
+                  :page-size="20"
+                  layout="total, sizes, prev, pager, next, jumper"
+                  :total="50">
+                </el-pagination>
+              </div>
             </div>
 
           </el-card>
@@ -302,6 +367,7 @@ export default {
   mounted() {},
   data() {
     return {
+      curTable: "check",
       value1: false,
       tableHeight: document.documentElement.clientHeight - 335,
       multipleSelection: [],

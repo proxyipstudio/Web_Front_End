@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 let utils = {};
 
 /*************************************
@@ -11,7 +13,7 @@ utils.randomNum = (count = 36) => Math.random().toString(count).substring(2);
 utils.randomColor = () => '#' + ('00000' + (Math.random() * 0x1000000 << 0).toString(16)).substr(-6);
 
 // 重复字符串
-utils.repeatString = (str, n) => new Array(n + 1).join(str); 
+utils.repeatString = (str, n) => new Array(n + 1).join(str);
 
 /*************************************
  * 时间操作
@@ -61,7 +63,7 @@ utils.random = (floor = 1, upper = 0) => {
     return Math.random() * floor;
   }
 
-  if (upper < floor) [floor, upper] = [upper, floor];
+  if (upper < floor)[floor, upper] = [upper, floor];
 
   return Math.random() * (upper - floor) + (floor + 1);
 }
@@ -78,7 +80,7 @@ utils.copy = (ele, isSelect) => {
   sRng.selectNodeContents(ele);
   rng.addRange(sRng);
   document.execCommand('copy');
-  if(!isSelect) rng.removeAllRanges();
+  if (!isSelect) rng.removeAllRanges();
 }
 
 // 获取当前页面的协议
@@ -90,6 +92,76 @@ utils.port = () => window.location.port;
 // 输出信息
 utils.info = () => {
   console.log('JavaScript Utils V1.0.0');
+}
+
+utils.get = (url, params = {}, isReturnAxiosData = false) => {
+  return new Promise((resolve, reject) => {
+    axios.get(url, {
+      params: params
+    }).then(res => {
+      if (isReturnAxiosData) {
+        resolve(res);
+        return;
+      }
+      resolve(res.data);
+    }).catch(e => {
+      reject(e);
+    });
+  });
+};
+
+utils.post = (url, params = {}, isReturnAxiosData = false) => {
+  let updateParams = new URLSearchParams();
+  for (let i in params) {
+    if (params.hasOwnProperty(i)) {
+      updateParams.append(i, params[i]);
+    }
+  }
+
+  return new Promise((resolve, reject) => {
+    axios.post(url, updateParams).then(res => {
+      if (isReturnAxiosData) {
+        resolve(res);
+        return;
+      }
+      resolve(res.data);
+    }).catch(e => {
+      reject(e);
+    });
+  });
+}
+
+utils.error = (scpoe, message = '', title = '错误') => {
+  scpoe.$notify.error({
+    title,
+    message
+  });
+}
+
+utils.errormsg = (scpoe) => {
+  scpoe.$notify.error({
+    title: '错误',
+    message: '发生错误(如: 无网络)'
+  });
+}
+
+utils.success = (scpoe, message = '', title = '成功') => {
+  scpoe.$notify({
+    title,
+    message,
+    type: "success"
+  });
+}
+
+utils.verify = (type, str) => {
+  switch (type) {
+    case 'url':
+      return /^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-\.,@?^=%&:\/~\+#]*[\w\-\@?^=%&\/~\+#])?$/.test(str);
+      break;
+  
+    default:
+      break;
+  }
 }
 
 export default utils;

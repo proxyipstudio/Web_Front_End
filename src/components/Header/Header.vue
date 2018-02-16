@@ -30,7 +30,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.curUsrName);
+    // console.log(this.curUsrName);
   },
   computed: {
     ...mapGetters(["curUsrName"])
