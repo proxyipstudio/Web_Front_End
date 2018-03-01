@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import BackStage from '@/components/BackStage/BackStage';
-import GatherNodes from '@/components/GatherNodes/GatherNodes';
+import ScadaNode from '@/components/ScadaNode/ScadaNode';
 import Users from '@/components/Users/Users';
 import Hosts from '@/components/Hosts/Hosts';
 import HostInfomation from '@/components/HostInfomation/HostInfomation';
@@ -14,6 +14,11 @@ import Stat from '@/components/Stat/Stat';
 import AccountSettings from '@/components/AccountSettings/AccountSettings';
 import RuleConfiguration from '@/components/RuleConfiguration/RuleConfiguration';
 import CheckConfiguration from '@/components/CheckConfiguration/CheckConfiguration';
+import IPPrice from '@/components/IPPrice/IPPrice';
+import Versions from '@/components/Versions/Versions';
+import CheckNode from '@/components/CheckNode/CheckNode';
+import AddNode from '@/components/AddNode/AddNode';
+import GatherNode from '@/components/GatherNode/GatherNode';
 
 Vue.use(Router);
 
@@ -36,11 +41,6 @@ export default new Router({
           path: 'dashboard',
           name: 'Dashboard',
           component: Dashboard
-        },
-        {
-          path: 'gathernodes',
-          name: 'GatherNodes',
-          component: GatherNodes
         },
         {
           path: 'users',
@@ -85,6 +85,36 @@ export default new Router({
           path: 'accountsettings',
           name: 'AccountSettings',
           component: AccountSettings
+        },
+        {
+          path: 'ipprice',
+          name: 'IPPrice',
+          component: IPPrice
+        },
+        {
+          path: 'versions',
+          name: 'Versions',
+          component: Versions
+        },
+        {
+          path: 'gathernode',
+          redirect: '/backstage/gathernode/scadanode',
+          component: GatherNode,
+          children: [
+          {
+            path: 'scadanode',
+            name: 'ScadaNode',
+            component: ScadaNode
+          },
+          {
+            path: 'checknode',
+            name: 'CheckNode',
+            component: CheckNode
+          }]
+        },{
+          path: 'addnode',
+          name: 'AddNode',
+          component: AddNode
         }
       ]
     }

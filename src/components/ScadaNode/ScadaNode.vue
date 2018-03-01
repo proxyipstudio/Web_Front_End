@@ -4,8 +4,7 @@
       <el-col :span="17">
         <div class="grid-content">
 
-          <div style="margin-bottom: 10px;">
-            <el-input placeholder="搜索" style="margin-bottom: 10px;"></el-input>
+          <div style="margin: 10px 0;">
 
             <el-button type="primary" icon="el-icon-success">打开节点</el-button>
             <el-button type="primary" icon="el-icon-error">关闭节点</el-button>
@@ -14,13 +13,7 @@
 
           <el-card class="box-card" body-style="padding: 0;">
             <div slot="header" class="clearfix">
-              <span>扫描节点列表</span>
-              <div style="float: right; padding: 3px 0">
-                <span style="color: #409EFF; cursor: pointer;" @click="curTable = 'check'"><span v-if="curTable === 'gather'">&emsp;</span><i class="el-icon-check" v-if="curTable === 'check'"></i>&nbsp;校验节点</span>
-                &emsp;
-                <span style="color: #409EFF; cursor: pointer;" @click="curTable = 'gather'"><span v-if="curTable === 'check'">&emsp;</span><i class="el-icon-check" v-if="curTable === 'gather'"></i>&nbsp;采集节点</span>
-              </div>
-             
+              <span>采集节点列表</span>
             </div>
             
             <div v-if="curTable === 'check'">
@@ -361,7 +354,9 @@
 
 <script>
 import { mapMutations } from "vuex";
-import { GatherNodes } from "../../common/config/breadcrumb";
+import { ScadaNode } from "../../common/config/breadcrumb";
+import utils from '../../assets/js/utils.esm';
+import API from '../../common/config/api';
 
 export default {
   mounted() {},
@@ -565,12 +560,20 @@ export default {
     ...mapMutations({
       setNavActive: "setNavActive",
       setBreadcrumb: "setBreadcrumb"
-    })
+    }),
+    async getGatherNodes() {
+      const data = await utils.post(API.GET_NODE_INFO_LIST, {
+        pageIndex: 1,
+        pageNumber: 20,
+        NodeType: 1
+      });
+    }
   },
-  created() {
-    this.setNavActive("1");
-
-    this.setBreadcrumb(GatherNodes);
+  mounted() {
+    this.setNavActive("1-1");
+    this.setBreadcrumb(ScadaNode);
+    utils.setScpoe(this);
+    this.getGatherNodes();
   }
 };
 </script>

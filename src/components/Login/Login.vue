@@ -109,7 +109,7 @@ export default {
       setTimeout(() => {
         loading.close();
         this.setUsrName(this.usrname);
-        this.$router.push("/backstage");
+        this.$router.push('/backstage');
       }, 1000);
 
       // this.$router.push('/backstage')

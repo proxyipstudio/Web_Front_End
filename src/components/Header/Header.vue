@@ -42,7 +42,7 @@ export default {
 @import "../../assets/scss/variable.scss";
 
 #header {
-  max-width: 1200px;
+  width: 90%;
   height: 60px;
   margin: 0 auto;
   line-height: 60px;
@@ -83,6 +83,12 @@ export default {
         }
       }
     }
+  }
+}
+
+@media (max-width: 1300px) {
+  #header {
+    width: 100%;
   }
 }
 </style>

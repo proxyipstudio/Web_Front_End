@@ -1,5 +1,24 @@
-export const GatherNodes = [{
+export const ScadaNode = [{
   text: '扫描节点',
+  route: '/backstage/gathernode'
+},{
+  text: '采集节点',
+  route: ''
+}];
+
+export const CheckNode = [{
+  text: '扫描节点',
+  route: '/backstage/gathernode'
+},{
+  text: '校验节点',
+  route: ''
+}];
+
+export const AddNode = [{
+  text: '扫描节点',
+  route: '/backstage/gathernode'
+},{
+  text: '添加节点',
   route: ''
 }];
 
@@ -83,11 +102,21 @@ export const CheckConfiguration = [{
 ];
 
 export const RuleConfiguration = [{
-    text: '配置项',
-    route: ''
-  },
-  {
-    text: '规则表',
-    route: '/backstage/ruleconfiguration'
-  }
+  text: '配置项',
+  route: ''
+},
+{
+  text: '规则表',
+  route: '/backstage/ruleconfiguration'
+}
 ];
+
+export const Versions = [{
+  text: '组件管理',
+  route: ''
+}];
+
+export const IPPrice = [{
+  text: 'IP价格表',
+  route: ''
+}];

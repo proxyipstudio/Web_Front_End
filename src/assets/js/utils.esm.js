@@ -2,6 +2,10 @@ import axios from 'axios';
 
 let utils = {};
 
+utils.setScpoe = scpoe => {
+  this.scpoe = scpoe;
+}
+
 /*************************************
  * 字符串操作
  ************************************/
@@ -94,10 +98,11 @@ utils.info = () => {
   console.log('JavaScript Utils V1.0.0');
 }
 
+// 封装axios的get
 utils.get = (url, params = {}, isReturnAxiosData = false) => {
   return new Promise((resolve, reject) => {
     axios.get(url, {
-      params: params
+      params
     }).then(res => {
       if (isReturnAxiosData) {
         resolve(res);
@@ -110,6 +115,7 @@ utils.get = (url, params = {}, isReturnAxiosData = false) => {
   });
 };
 
+// 封装axios的post 并默认把数据以表单形式提交
 utils.post = (url, params = {}, isReturnAxiosData = false) => {
   let updateParams = new URLSearchParams();
   for (let i in params) {
@@ -131,22 +137,22 @@ utils.post = (url, params = {}, isReturnAxiosData = false) => {
   });
 }
 
-utils.error = (scpoe, message = '', title = '错误') => {
-  scpoe.$notify.error({
+utils.error = (message = '', title = '错误') => {
+  this.scpoe.$notify.error({
     title,
     message
   });
 }
 
-utils.errormsg = (scpoe) => {
-  scpoe.$notify.error({
+utils.errormsg = () => {
+  this.scpoe.$notify.error({
     title: '错误',
     message: '发生错误(如: 无网络)'
   });
 }
 
-utils.success = (scpoe, message = '', title = '成功') => {
-  scpoe.$notify({
+utils.success = (message = '', title = '成功') => {
+  this.scpoe.$notify({
     title,
     message,
     type: "success"
@@ -158,10 +164,47 @@ utils.verify = (type, str) => {
     case 'url':
       return /^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-\.,@?^=%&:\/~\+#]*[\w\-\@?^=%&\/~\+#])?$/.test(str);
       break;
-  
     default:
       break;
   }
 }
+
+// 获取当前时间 (YYYY-MM-DD HH:mm:ss)
+utils.getCurTime = () => {
+  let date = new Date();
+  return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${(date.getDate()).toString().padStart(2, '0')} ${(date.getHours()).toString().padStart(2, '0')}:${(date.getMinutes()).toString().padStart(2, '0')}:${(date.getSeconds()).toString().padStart(2, '0')}`;
+}
+
+// 时间比较 (YYYY-MM-DD HH:mm:ss)
+utils.compareTime = (startTime,endTime) => {
+  let startTimes = startTime.substring(0, 10).split('-');
+  let endTimes = endTime.substring(0, 10).split('-');
+  startTime = startTimes[1] + '-' + startTimes[2] + '-' + startTimes[0] + ' ' + startTime.substring(10, 19);
+  endTime = endTimes[1] + '-' + endTimes[2] + '-' + endTimes[0] + ' ' + endTime.substring(10, 19);
+  let thisResult = (Date.parse(endTime) - Date.parse(startTime)) / 3600 / 1000;
+  if (thisResult > 0) return false;
+  return true;
+}
+
+// 往localStorage添加数据
+utils.setLocalData = (key, val) => {
+  val = val || {};
+
+  localStorage.setItem(key, JSON.stringify(val));
+}
+
+// 从loaclStorage取数据
+utils.getLocalData = key => JSON.parse(localStorage.getItem(key));
+
+// 往sesstionStorage添加数据
+utils.setLocalSession = (key, val) => {
+  val = val || {};
+
+  sessionStorage.setItem(key, JSON.stringify(val));
+}
+
+// 从sessionStorage取数据
+utils.getLocalSession = key => JSON.parse(sessionStorage.getItem(key));
+
 
 export default utils;

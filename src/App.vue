@@ -34,8 +34,18 @@ export default {
 }
 
 #app {
-  width: 1200px;
+  width: 90%;
   height: 100%;
   margin: 0 auto;
+}
+
+@media (max-width: 1300px) {
+  #app {
+    width: 1300px;
+  }
+
+  #nav-header {
+    width: 1300px;
+  }
 }
 </style>

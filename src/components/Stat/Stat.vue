@@ -61,7 +61,7 @@ export default {
     handleClick() {}
   },
   created() {
-    this.setNavActive("6");
+    this.setNavActive("8");
 
     this.setBreadcrumb(Stat);
   }

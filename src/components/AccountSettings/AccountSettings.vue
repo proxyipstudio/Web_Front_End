@@ -60,7 +60,7 @@ export default {
     }
   },
   created() {
-    this.setNavActive("7");
+    this.setNavActive("9");
 
     this.setBreadcrumb(AccountSettings);
   }

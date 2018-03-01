@@ -14,7 +14,9 @@
         </el-breadcrumb>
       </el-card>
 
+      <!-- <keep-alive> -->
       <router-view></router-view>
+      <!-- </keep-alive> -->
 
     </div>
 

@@ -220,7 +220,7 @@ export default {
     handleClick() {}
   },
   created() {
-    this.setNavActive("3");
+    this.setNavActive("10");
 
     this.setBreadcrumb(Users);
   }

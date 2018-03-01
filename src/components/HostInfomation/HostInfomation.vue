@@ -11,7 +11,7 @@
                     <span>主机信息</span>
                     <!-- <el-button style="float: right; padding: 3px 0" type="text"></el-button> -->
                   </div>
-                  <div>
+                  <div v-loading="loading">
                     
                     <el-row class="mb10">
                       <el-col :span="8">
@@ -21,7 +21,7 @@
                       </el-col>
                       <el-col :span="16">
                         <div class="grid-content gray">
-                          爬黄网
+                          <span v-text="hostInfo.HostName"></span>
                         </div>
                       </el-col>
                     </el-row>
@@ -34,7 +34,7 @@
                       </el-col>
                       <el-col :span="16">
                         <div class="grid-content gray">
-                          {{ this.$route.params.id }}
+                          <span v-text="hostInfo.SerialNumber"></span>
                         </div>
                       </el-col>
                     </el-row>
@@ -47,7 +47,7 @@
                       </el-col>
                       <el-col :span="16">
                         <div class="grid-content gray">
-                          122.121.11.2
+                          <span v-text="hostInfo.IPIn"></span>
                         </div>
                       </el-col>
                     </el-row>
@@ -60,7 +60,7 @@
                       </el-col>
                       <el-col :span="16">
                         <div class="grid-content gray">
-                          122.121.11.2
+                          <span v-text="hostInfo.IPOut"></span>
                         </div>
                       </el-col>
                     </el-row>
@@ -68,12 +68,12 @@
                     <el-row class="mb10">
                       <el-col :span="8">
                         <div class="grid-content">
-                          远程桌面用户吗
+                          远程桌面用户名
                         </div>
                       </el-col>
                       <el-col :span="16">
                         <div class="grid-content gray">
-                          Administrator
+                          <span v-text="hostInfo.adminstrator"></span>
                         </div>
                       </el-col>
                     </el-row>
@@ -86,8 +86,7 @@
                       </el-col>
                       <el-col :span="16">
                         <div class="grid-content gray">
-                          <span style="color: #F56C6C; cursor: pointer">点击查看</span>
-                          <i class="el-icon-edit"></i>
+                          <span style="color: #409EFF; cursor: pointer">点击查看</span>
                         </div>
                       </el-col>
                     </el-row>
@@ -100,7 +99,7 @@
                       </el-col>
                       <el-col :span="16">
                         <div class="grid-content gray">
-                          idss112541
+                          <span v-text="hostInfo.KDUser"></span>
                         </div>
                       </el-col>
                     </el-row>
@@ -113,8 +112,7 @@
                       </el-col>
                       <el-col :span="16">
                         <div class="grid-content gray">
-                          <span style="color: #F56C6C; cursor: pointer">点击查看</span>
-                          <i class="el-icon-edit"></i>
+                          <span style="color: #409EFF; cursor: pointer">点击查看</span>
                         </div>
                       </el-col>
                     </el-row>
@@ -140,6 +138,7 @@
                     <span>节点列表</span>
                   </div>
                   <el-table
+                  v-loading="loading"
                   :data="gnData"
                   border
                   style="width: 100%; border: 0 none"
@@ -171,7 +170,7 @@
                   <div slot="header" class="clearfix">
                     <span>操作</span>
                   </div>
-                  <div>
+                  <div v-loading="loading">
 
                     <el-row class="mb10">
                       <el-col :span="9">
@@ -201,7 +200,7 @@
                   <div slot="header" class="clearfix">
                     <span>硬件使用率</span>
                   </div>
-                  <div>
+                  <div v-loading="loading">
 
                     <el-row class="mb10">
                       <el-col :span="9">
@@ -238,35 +237,37 @@
                     <span>磁盘详情</span>
                   </div>
                 
-                  <el-row class="mb10">
-                    <el-col :span="9">
-                      <div class="grid-content">
-                        <i class="fa fa-hdd-o"></i>
-                        磁盘1 (C:/) <br>
-                        <small class="gray">120G / 2000G</small>
-                      </div>
-                    </el-col>
-                    <el-col :span="15">
-                      <div class="grid-content gray">
-                        <el-progress :text-inside="true" :stroke-width="18" :percentage="69" status="success"></el-progress>
-                      </div>
-                    </el-col>
-                  </el-row>
+                  <div v-loading="loading">
+                    <el-row class="mb10">
+                      <el-col :span="9">
+                        <div class="grid-content">
+                          <i class="fa fa-hdd-o"></i>
+                          磁盘1 (C:/) <br>
+                          <small class="gray">120G / 2000G</small>
+                        </div>
+                      </el-col>
+                      <el-col :span="15">
+                        <div class="grid-content gray">
+                          <el-progress :text-inside="true" :stroke-width="18" :percentage="69" status="success"></el-progress>
+                        </div>
+                      </el-col>
+                    </el-row>
 
-                  <el-row>
-                    <el-col :span="9">
-                      <div class="grid-content">
-                        <i class="fa fa-hdd-o"></i>
-                        磁盘2 (D:/) <br>
-                        <small class="gray">120G / 2000G</small>
-                      </div>
-                    </el-col>
-                    <el-col :span="15">
-                      <div class="grid-content gray">
-                        <el-progress :text-inside="true" :stroke-width="18" :percentage="10" status="success"></el-progress>
-                      </div>
-                    </el-col>
-                  </el-row>
+                    <el-row>
+                      <el-col :span="9">
+                        <div class="grid-content">
+                          <i class="fa fa-hdd-o"></i>
+                          磁盘2 (D:/) <br>
+                          <small class="gray">120G / 2000G</small>
+                        </div>
+                      </el-col>
+                      <el-col :span="15">
+                        <div class="grid-content gray">
+                          <el-progress :text-inside="true" :stroke-width="18" :percentage="10" status="success"></el-progress>
+                        </div>
+                      </el-col>
+                    </el-row>
+                  </div>
 
                 </el-card>
 
@@ -283,11 +284,17 @@
 <script>
 import { mapMutations } from "vuex";
 import { HostInfomation } from "../../common/config/breadcrumb";
+import utils from '../../assets/js/utils.esm';
+import API from '../../common/config/api';
 
 export default {
   data() {
     return {
+      loading: true,
       value1: true,
+
+      hostInfo: {},
+
       memory: {
         total: 8192,
         using: 1322
@@ -368,10 +375,29 @@ export default {
     ...mapMutations({
       setNavActive: "setNavActive",
       setBreadcrumb: "setBreadcrumb"
-    })
+    }),
+    async loadHostInfomation() {
+      try {
+        const data = await utils.post(API.GET_VPS_BY_ID, {
+          Id: this.$route.params.id
+        });
+
+        if (data.status) {
+          this.hostInfo = data.data.info;
+          this.loading = false;
+        }
+
+      } catch (e) {
+        utils.errormsg();
+      }
+    }
   },
-  created() {
+  mounted() {
     this.setNavActive("2");
+    this.setBreadcrumb(HostInfomation);
+    utils.setScpoe(this);
+    this.loadHostInfomation();
+
     setInterval(() => {
       let using = parseInt(Math.random() * 8192);
 
@@ -381,8 +407,6 @@ export default {
       this.memoryrate = rate;
       this.memorybarstatus = rate > 75 ? "exception" : "success";
     }, 2000);
-
-    this.setBreadcrumb(HostInfomation);
   }
 };
 </script>

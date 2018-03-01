@@ -1,7 +1,7 @@
 <template>
-  <div id="rc">
-    <el-tabs tab-position="left" @tab-click="tabRefresh">
-      <el-tab-pane label="规则">
+  <div id="#version">
+    <el-tabs tab-position="left">
+      <el-tab-pane label="版本管理">
         <el-row>
           <el-col :span="24">
             <div class="grid-content">
@@ -245,86 +245,86 @@
           </el-col>
 
         </el-row>
-
       </el-tab-pane>
-      <el-tab-pane label="添加">
+      <el-tab-pane label="添加版本">
 
         <el-form ref="form" :model="addData" label-width="120px">
-          <el-form-item label="*采集地址">
-            <el-input v-model="addData.Urls"></el-input>
+          <el-form-item label="版本号">
+            <el-input v-model="addData.VersionNumber"></el-input>
           </el-form-item>
-          <el-form-item label="IP">
-            <el-input v-model="addData.RegIp"></el-input>
+          <el-form-item label="版本名称">
+            <el-input v-model="addData.VersionNumber"></el-input>
           </el-form-item>
-          <el-form-item label="端口">
-            <el-input v-model="addData.RegPort"></el-input>
+          <el-form-item label="组件所有者">
+            <el-radio-group v-model="addData.PartOwner">
+              <el-radio label="采集模块"></el-radio>
+              <el-radio label="中间件模块"></el-radio>
+            </el-radio-group>
           </el-form-item>
-          <el-form-item label="匿名度">
-            <el-input v-model="addData.RegAnonymous"></el-input>
+          <el-form-item label="版本文件">
+            <el-radio-group>
+
+              <el-upload
+                class="upload-demo"
+                ref="upload"
+                action="https://jsonplaceholder.typicode.com/posts/"
+                :on-preview="handlePreview"
+                :on-remove="handleRemove"
+                :file-list="fileList"
+                :auto-upload="false">
+                <el-button slot="trigger" size="small" type="primary" style="width: 100px">选取文件</el-button>
+              </el-upload>
+
+            </el-radio-group>
           </el-form-item>
-          <el-form-item label="类型">
-            <el-input v-model="addData.RegType"></el-input>
+
+          <el-form-item label=" ">
+            <el-radio-group>
+              <el-button style="width: 100px" size="small" type="success" @click="submitUpload">添加</el-button>
+            </el-radio-group>
           </el-form-item>
-          <el-form-item label="国家">
-            <el-input v-model="addData.RegCountry"></el-input>
-          </el-form-item>
-          <el-form-item label="省">
-            <el-input v-model="addData.RegProvince"></el-input>
-          </el-form-item>
-          <el-form-item label="市">
-            <el-input v-model="addData.RegCity"></el-input>
-          </el-form-item>
-          <el-form-item label="请求头">
-            <el-input type="textarea" v-model="addData.ReqHead" @keyup.native="checkReqJson('add')"></el-input>
-            是否压缩(去除换行、空格): <el-switch v-model="isCompress"></el-switch>
-            <span v-text="reqHeadCheckTips" style="color: red;"></span>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="add" :loading="adding">添加</el-button>
-          </el-form-item>
+
         </el-form>
 
       </el-tab-pane>
-    </el-tabs>
-
-
+    </el-tabs> 
   </div>
 </template>
 
 <script>
 import { mapMutations } from "vuex";
-import { RuleConfiguration } from "../../common/config/breadcrumb";
-import API from "../../common/config/api";
-import utils from "../../assets/js/utils.esm";
-import { throws } from 'assert';
-// import axios from 'axios';
-
+import { Versions } from "../../common/config/breadcrumb";
+import utils from '../../assets/js/utils.esm';
+import API from '../../common/config/api';
 
 export default {
+  data() {
+    return {
+      tbRules: [],
+      curRuleData: {},
+      curExRow: null,
+      tableHeight: document.documentElement.clientHeight - 230,
+
+      loadingData: true,
+
+      total: 0,
+
+      addData: {
+        VersionNumber: '',
+        PartName: '',
+        PartOwner: 1
+      },
+
+      fileList: []
+    };
+  },
   methods: {
     ...mapMutations({
       setNavActive: "setNavActive",
       setBreadcrumb: "setBreadcrumb"
     }),
-    checkReqJson(type) {
-      if (this.timer) clearTimeout(this.timer);
+    setPage() {
 
-      this.timer = setTimeout(() => {
-        try {
-          if (type === 'add') {
-            JSON.parse(this.addData.ReqHead);
-            this.reqHeadCheckTips = '';
-          }
-          if (type === 'update') {
-            JSON.parse(this.curRuleData.ReqHead);
-            this.updateReqHeadCheckTips = '';
-          }
-
-        } catch (e) {
-          if (type === 'add') this.reqHeadCheckTips = 'JSON格式不正确';
-          if (type === 'update') this.updateReqHeadCheckTips = 'JSON格式不正确';
-        }
-      }, 300);
     },
     setRuleData(row, eRows) {
       this.curRuleData = Object.assign({}, row);
@@ -333,274 +333,32 @@ export default {
       if (this.curExRow && this.curExRow.ID !== row.ID) this.$refs.tb.toggleRowExpansion(this.curExRow, false);
       this.curExRow = row;
     },
-    // tab切换后刷新添加数据
-    tabRefresh() {
-      this.getRuleList();
-    },
-    // 分页切换
-    setPage(index) {
-      this.getRuleList(index);
-    },
-    // 添加规则
-    async add() {
-      if (this.addData.Urls === '') {
-        utils.error('采集地址不能为空');
-
-        return;
-      }
-
-      if (!utils.verify('url', this.addData.Urls.toLowerCase())) {
-        utils.error('采集地址格式不正确');
-
-        return;
-      }
-
-      if (this.addData.ReqHead !== '') {
-        try {
-          if (this.isCompress) {
-            this.addData.ReqHead = JSON.stringify(JSON.parse(this.addData.ReqHead));
-          }
-          JSON.parse(this.addData.ReqHead);
-        } catch (e) {
-          utils.error( 'JSON格式不正确');
-          return;
-        }
-      }
-
-      this.adding = true;
+    async getVersionList(pageIndex = 1) {
       try {
-        const data = await utils.post(API.AU_TASK_RULE, this.addData);
-
-        if (data.status) {
-          
-          utils.success(data.msg);
-
-          for (let i in this.addData) {
-            this.addData[i] = '';
-          }
-
-          this.adding = false;          
-          return;
-        }
-
-        utils.error(data.msg);
-        this.adding = false;
-      } catch (e) {
-        utils.errormsg();
-        this.adding = false;
-        console.log(e);
-      }
-    },
-    // 更新规则
-    async update() {
-      if (this.curRuleData.Url === '') {
-        utils.error('采集地址不能为空');
-        return;
-      }
-
-      if (!utils.verify('url', this.curRuleData.Url.toLowerCase())) {
-        utils.error('采集地址格式不正确');
-
-        return;
-      }
-
-      if (this.curRuleData.ReqHead !== '') {
-        try {
-          if (this.updateIsCompress) {
-            this.curRuleData.ReqHead = JSON.stringify(JSON.parse(this.curRuleData.ReqHead));
-          }
-          JSON.parse(this.curRuleData.ReqHead)
-        } catch (e) {
-          utils.error('JSON格式不正确');
-          return;
-        }
-      }
-      
-
-      const updateData = {
-        Urls: this.curRuleData.Url,
-        RegIp: this.curRuleData.RegIp,
-        RegPort: this.curRuleData.RegPort,
-        RegAnonymous: this.curRuleData.RegAnonymous,
-        RegType: this.curRuleData.RegType,
-        RegCountry: this.curRuleData.RegCountry,
-        RegProvince: this.curRuleData.RegProvince,
-        RegCity: this.curRuleData.RegCity,
-        ID: this.curRuleData.ID,
-        ReqHead: this.curRuleData.ReqHead
-      }
-
-      this.updating = true;
-
-      try {
-        const data = await utils.post(API.AU_TASK_RULE, updateData);
-
-        if (data.status) {
-          utils.success(data.msg);
-
-          for (let i = 0; i < this.tbRules.length; i ++) {
-            if (this.tbRules[i].ID === updateData.ID) {
-              Object.assign(this.tbRules[i], updateData);
-              this.tbRules[i].Url = updateData.Urls;
-              break;
-            }
-          } 
-          this.updating = false;
-          return;
-        }
- 
-        utils.error(data.msg);
-        this.updating = false;
-      } catch (e) {
-        this.updating = false;
-        utils.errormsg();
-      }
-    },
-    // 加载采集规则
-    async getRuleList(index = 1) {
-      this.loadingData = true;
-      try {
-        const data = await utils.post(API.GET_TASK_RULE_LIST, {
-          pageIndex: index,
+        const data = await utils.post(API.GET_VERSION_LIST, {
+          pageIndex,
           pageNumber: 20
         });
-
-        let tbData = data.data.TaskRule;
-
-        tbData.forEach(item => {
-          for(let i in item) {
-            if (item.hasOwnProperty(i)) {
-              if (item[i] === null) item[i] = '';
-            }
-          }
-        });
-        
-        this.total = data.data.count;
-        this.tbRules = tbData;
-        this.loadingData = false;
       } catch (e) {
-        this.loadingData = false;
-        utils.errormsg();
-        console.log(e);
+
       }
     },
-    // 删除采集规则
-    async deleteTaskRule(id) {
-      if (!id) {
-        utils.error('无效操作');
-        return;
-      }
 
-      this.$confirm('是否删除', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(async () => {
-        try {
-          const data = await utils.post(API.DELETE_TASK_RULE, { id });
-
-          if (data.status) {
-            utils.success(data.msg);
-
-            for (let i = 0; i < this.tbRules.length; i ++) {
-              if (this.tbRules[i].ID === id) {
-                this.tbRules.splice(i, 1);
-                break;
-              }
-            }
-
-            this.total -= 1;
-            return;
-          }
-
-          utils.error(data.msg);
-        } catch (e) {
-          utils.errormsg();
-          console.log(e);
-        }
-      }).catch(() => {});
-      
-    }
-  },
-  async mounted() {
-    this.setBreadcrumb(RuleConfiguration);
-    this.setNavActive("5-1");
-
-    utils.setScpoe(this);
-    
-    this.getRuleList();
-  },
-  data() {
-    return {
-      tbRules: [],
-      curRuleData: {},
-      curExRow: null,
-      tableHeight: document.documentElement.clientHeight - 230,
-
-      updating: false,
-      loadingData: true,
-      adding: false,
-
-      updateReqHeadCheckTips: '',
-      updateIsCompress: true,
-
-      total: 0,
-
-      addData: {
-        Urls: '',
-        RegIp: '',
-        RegPort: '',
-        RegAnonymous: '',
-        RegType: '',
-        RegCountry: '',
-        RegProvince: '',
-        RegCity: '',
-        ReqHead: ''
+    submitUpload() {
+        this.$refs.upload.submit();
       },
-      isCompress: true,
-      reqHeadCheckTips: ''
-    };
-  },
-  filters: {
-    formatTableDataLength(val) {
-      if (val.length > 12) {
-        return val.substring(0, 12) + "...";
+      handleRemove(file, fileList) {
+        console.log(file, fileList);
+      },
+      handlePreview(file) {
+        console.log(file);
       }
-      return val;
-    }
+  },
+  mounted() {
+    this.setNavActive("6");
+    this.setBreadcrumb(Versions);
+    utils.setScpoe(this);
+    this.getVersionList();
   }
 };
 </script>
-
-<style lang="scss" scoped>
-@import "../../assets/scss/variable.scss";
-
-#rc {
-  .editItem {
-    margin-bottom: 15px;
-
-    .editInput {
-      width: 100%;
-      border: 0 none;
-      outline: none;
-      background: transparent;
-      // border-bottom: 2px solid $blue;
-      padding: 3px;
-      transition: all 0.2s;
-
-      &:focus {
-        border-bottom: 2px solid $red;
-        font-size: 1.1rem;
-      }
-    }
-
-    .title {
-      padding: 5px;
-    }
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-}
-</style>

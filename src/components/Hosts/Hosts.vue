@@ -1,5 +1,6 @@
 <template>
   <div id="gn">
+
     <el-row :gutter="10">
       <el-col :span="24">
         <div class="grid-content">
@@ -11,37 +12,46 @@
             <el-table
             :data="vpsData"
             border
+            :height="tableHeight"
             style="width: 100%; border: 0 none"
             ref="gnTable"
             :row-class-name="tableRowClassName">
               <el-table-column
-                prop="id"
-                label="主机编号">
+                prop="HostName"
+                label="主机名">
               </el-table-column>
               <el-table-column
-                prop="ip"
+                prop="IPIn"
+                label="内网IP"
+                >
+              </el-table-column>
+              <el-table-column
+                prop="IPOut"
                 label="外网IP"
                 >
               </el-table-column>
               <el-table-column
-                prop="nodecount"
-                label="节点数量"
-                >
-              </el-table-column>
-              <el-table-column
-                prop="cpu"
+                prop="Cpu"
                 label="CPU">
               </el-table-column>
               <el-table-column
-                prop="memory"
+                prop="RAM"
                 label="内存">
+              </el-table-column>
+              <el-table-column
+                prop="IsOpen"
+                label="是否开启">
+                <template slot-scope="scope">
+                  <span v-if="scope.row.IsOpen === 1">是</span>
+                  <span v-if="scope.row.IsOpen !== 1" style="color: red">否</span>
+                </template>
               </el-table-column>
               <el-table-column label="操作">
                 <template slot-scope="scope">
                   <el-button
                     size="mini"
                     type="primary"
-                    @click="handleEdit(scope.$index, scope.row)">详情</el-button>
+                    @click="detail(scope.$index, scope.row)">详情</el-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -51,10 +61,9 @@
                 @size-change="aaa"
                 @current-change="aaa"
                 :current-page="1"
-                :page-sizes="[10, 20, 40, 100]"
                 :page-size="20"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="20">
+                layout="total, prev, pager, next, jumper"
+                :total="total">
               </el-pagination>
             </div>
 
@@ -65,43 +74,30 @@
         </div>
       </el-col>
     </el-row>
+
   </div>
 </template>
 
 <script>
 import { mapMutations } from "vuex";
 import { Hosts } from "../../common/config/breadcrumb";
+import utils from '../../assets/js/utils.esm';
+import API from '../../common/config/api';
 
 export default {
   mounted() {},
   data() {
     return {
       value1: false,
-      // tableHeight: document.documentElement.clientHeight - 335,
-      multipleSelection: [],
-      vpsData: [
-        {
-          id: "15ASS11",
-          ip: "112.225.212.221",
-          nodecount: 16,
-          cpu: "16%",
-          memory: "46%"
-        }
-      ]
+      tableHeight: document.documentElement.clientHeight - 235,
+      total: 0,
+      vpsData: [],
     };
   },
   methods: {
-    handleEdit(index, row) {
-      console.log(index, row);
-
-      // const {href} = this.$router.resolve({
-      //   path: `/backstage/hosts/${row.id}`
-      // })
-
-      // window.open(href, '_blank')
-
+    detail(index, row) {
       this.$router.push({
-        path: `/backstage/hosts/${row.id}`
+        path: `/backstage/hosts/${row.ID}`
       });
     },
     handleDelete(index, row) {
@@ -121,12 +117,39 @@ export default {
     ...mapMutations({
       setNavActive: "setNavActive",
       setBreadcrumb: "setBreadcrumb"
-    })
-  },
-  created() {
-    this.setNavActive("2");
+    }),
+    // 获取主机信息
+    async getVPSList(pageIndex = 1) {
+      try {
+        const data = await utils.post(API.GET_VPS_LIST, {
+          pageIndex,
+          pageNumber: 20
+        });
 
+        if (data.status) {
+          this.total = data.data.count;
+
+          data.data.List.forEach(item => {
+
+            for (let i in item) {
+              if (item[i] === null) item[i] = '';
+            }
+            this.vpsData.push(item);
+
+          });
+
+          return;
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  },
+  mounted() {
+    this.setNavActive("2");
     this.setBreadcrumb(Hosts);
+    utils.setScpoe(this);
+    this.getVPSList();
   }
 };
 </script>
