@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="stat">
     <el-tabs v-model="tab" @tab-click="handleClick" tab-position="left">
       <el-tab-pane label="订单统计" name="first">
 
@@ -67,3 +67,11 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+  @import '../../assets/scss/variable.scss';
+  
+  #stat {
+    @extend .pager;
+  }
+</style>

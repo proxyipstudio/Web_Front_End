@@ -52,6 +52,22 @@ const API = {
 
   // 获取版本列表
   'GET_VERSION_LIST': cu('/VersionInfo/GetVersionList'),
+
+
+  // IP价格
+
+  // 获取价格列表
+  'GET_IP_PRICE_LIST': cu('/IpPrice/GetIpPriceList'),
+  // 修改、添加价格表
+  'AU_IP_PRICE': cu('/IpPrice/AUIpPrice'),
+  // 删除价格表
+  'DELETE_IP_PRICE': cu('/IpPrice/DeleteIpPrice'),
+
+
+  // 用户相关
+
+  // 退出
+  'LOGIN_OUT': cu('/LoginOut'),
 }
 
 export default API;

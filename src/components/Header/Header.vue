@@ -20,13 +20,21 @@
 
 <script>
 import { mapGetters } from "vuex";
+import utils from '../../assets/js/utils.esm';
+import API from '../../common/config/api';
 
 export default {
   methods: {
-    logout() {
-      this.$router.push({
-        path: "/login"
-      });
+    async logout() {
+      // try {
+      //   const data = await utils.post(API.LOGIN_OUT);
+        this.$router.replace({
+          path: "/login"
+        });
+      // } catch (e) {
+      //   utils.errormsg();
+      // }
+      
     }
   },
   mounted() {

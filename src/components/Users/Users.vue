@@ -228,7 +228,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../assets/scss/variable.scss';
+
 #gn {
+  @extend .pager;
+  
   .detailInfo {
     font-size: 0.9rem;
 

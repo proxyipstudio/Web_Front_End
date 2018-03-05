@@ -14,9 +14,9 @@
         </el-breadcrumb>
       </el-card>
 
-      <!-- <keep-alive> -->
-      <router-view></router-view>
-      <!-- </keep-alive> -->
+      <transition name="el-fade-in-linear">
+        <router-view></router-view>
+      </transition>
 
     </div>
 
@@ -57,11 +57,11 @@ export default {
   }
 
   #rightContainer {
+    position: relative;
     float: left;
     height: 100%;
     width: calc(100% - 215px);
     overflow-y: scroll;
-    // overflow-x: hidden;
   }
 }
 </style>

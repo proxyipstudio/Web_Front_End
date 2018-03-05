@@ -17,7 +17,6 @@ import CheckConfiguration from '@/components/CheckConfiguration/CheckConfigurati
 import IPPrice from '@/components/IPPrice/IPPrice';
 import Versions from '@/components/Versions/Versions';
 import CheckNode from '@/components/CheckNode/CheckNode';
-import AddNode from '@/components/AddNode/AddNode';
 import GatherNode from '@/components/GatherNode/GatherNode';
 
 Vue.use(Router);
@@ -111,10 +110,6 @@ export default new Router({
             name: 'CheckNode',
             component: CheckNode
           }]
-        },{
-          path: 'addnode',
-          name: 'AddNode',
-          component: AddNode
         }
       ]
     }

@@ -1,5 +1,5 @@
 <template>
-  <div id="#version">
+  <div id="version">
     <el-tabs tab-position="left">
       <el-tab-pane label="版本管理">
         <el-row>
@@ -355,10 +355,18 @@ export default {
       }
   },
   mounted() {
-    this.setNavActive("6");
+    this.setNavActive("1-2");
     this.setBreadcrumb(Versions);
     utils.setScpoe(this);
     this.getVersionList();
   }
 };
 </script>
+
+<style lang="scss" scoped>
+  @import '../../assets/scss/variable.scss';
+  
+  #version {
+    @extend .pager;
+  }
+</style>

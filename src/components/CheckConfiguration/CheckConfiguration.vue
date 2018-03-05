@@ -475,6 +475,8 @@ export default {
 @import "../../assets/scss/variable.scss";
 
 #cc {
+  @extend .pager;
+    
   .editItem {
     margin-bottom: 15px;
 

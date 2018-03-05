@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="accountsetting">
     <el-tabs v-model="activeName" tab-position="left" @tab-click="handleClick">
       <el-tab-pane label="基础信息修改" name="first">基础信息修改</el-tab-pane>
       <el-tab-pane label="修改密码" name="second">
@@ -66,3 +66,11 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+  @import '../../assets/scss/variable.scss';
+
+  #accountsetting {
+    @extend .pager;
+  }
+</style>

@@ -579,6 +579,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../assets/scss/variable.scss';
+
 #gn {
   .detailInfo {
     font-size: 0.9rem;

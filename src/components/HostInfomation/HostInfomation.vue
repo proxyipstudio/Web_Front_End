@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="hostinfo">
     <el-row>
       <el-col :span="24">
         <div class="grid-content">
@@ -156,8 +156,11 @@
                       prop="scanrate"
                       label="扫描速率" />
                     <el-table-column
-                      prop="scancount"
-                      label="扫描总数" />
+                      label="操作">
+                      <template slot-scope="scope">
+                        <el-button type="danger" size="mini">关闭</el-button>
+                      </template>
+                    </el-table-column>
                   </el-table>
                 </el-card>
               </div>  
@@ -312,61 +315,6 @@ export default {
           scancount: "998",
           hostip: "127.0.1.2",
           hostid: "9"
-        },
-        {
-          id: "1112",
-          version: "12",
-          programname: "呱呱",
-          runtime: "199s",
-          starttime: "2017-1-1",
-          scanrate: "33/s",
-          scancount: "998",
-          hostip: "127.0.1.2",
-          hostid: "9"
-        },
-        {
-          id: "1112",
-          version: "12",
-          programname: "呱呱",
-          runtime: "199s",
-          starttime: "2017-1-1",
-          scanrate: "33/s",
-          scancount: "998",
-          hostip: "127.0.1.2",
-          hostid: "9"
-        },
-        {
-          id: "1112",
-          version: "12",
-          programname: "呱呱",
-          runtime: "199s",
-          starttime: "2017-1-1",
-          scanrate: "33/s",
-          scancount: "998",
-          hostip: "127.0.1.2",
-          hostid: "9"
-        },
-        {
-          id: "1112",
-          version: "12",
-          programname: "呱呱",
-          runtime: "199s",
-          starttime: "2017-1-1",
-          scanrate: "33/s",
-          scancount: "998",
-          hostip: "127.0.1.2",
-          hostid: "9"
-        },
-        {
-          id: "1112",
-          version: "12",
-          programname: "呱呱",
-          runtime: "199s",
-          starttime: "2017-1-1",
-          scanrate: "33/s",
-          scancount: "998",
-          hostip: "127.0.1.2",
-          hostid: "9"
         }
       ]
     };
@@ -413,5 +361,9 @@ export default {
 
 
 <style lang="scss" scoped>
-
+  @import '../../assets/scss/variable.scss';
+  
+  #hostinfo {
+    @extend .pager;
+  }
 </style>

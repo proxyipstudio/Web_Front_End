@@ -19,7 +19,7 @@
             </template>
             <el-menu-item-group>
               <el-menu-item index="1-1" @click="goto('/backstage/gathernode/scadanode')">节点管理</el-menu-item>
-              <el-menu-item index="1-2" @click="goto('/backstage/addnode')">添加节点</el-menu-item>
+              <el-menu-item index="1-2" @click="goto('/backstage/versions')">版本管理</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
           <el-menu-item index="2" @click="goto('/backstage/hosts')">
@@ -46,10 +46,6 @@
               <el-menu-item index="5-2" @click="goto('/backstage/checkconfiguration')">校验规则</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
-          <el-menu-item index="6" @click="goto('/backstage/versions')">
-            <i class="fa fa-cubes"></i>
-            <span slot="title">组件管理</span>
-          </el-menu-item>
           <el-menu-item index="7" @click="goto('/backstage/ipprice')">
             <i class="fa fa-code"></i>
             <span slot="title">IP价格表</span>

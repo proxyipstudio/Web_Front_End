@@ -4,3 +4,10 @@ $deep-blue: #2d91f5;
 $black: #000000;
 $gray: #909399;
 $red: #F56C6C;
+
+.pager {
+	position: absolute;
+	// width: calc(100% - 408px);
+	// width: 100%;
+	width: 100%;
+}

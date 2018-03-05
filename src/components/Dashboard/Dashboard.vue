@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="dashboard">
     DB
   </div>
 </template>
@@ -22,3 +22,11 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+  @import '../../assets/scss/variable.scss';
+  
+  #dashboard {
+    @extend .pager;
+  }
+</style>

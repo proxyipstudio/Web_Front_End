@@ -21,8 +21,16 @@ export default {
     }),
   },
   created() {
-    this.setNavActive("1-2");
+    this.setNavActive("1-1");
     this.setBreadcrumb(CheckNode);
   }
 };
 </script>
+
+<style lang="scss" scoped>
+  @import '../../assets/scss/variable.scss';
+  
+  #checknode {
+
+  }
+</style>

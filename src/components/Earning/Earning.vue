@@ -112,6 +112,8 @@ export default {
 @import "../../assets/scss/variable.scss";
 
 #earning {
+  @extend .pager;
+
   .alertpanel {
     .title {
       font-size: 1.3rem;

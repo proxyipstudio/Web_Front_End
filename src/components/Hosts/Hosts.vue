@@ -40,10 +40,17 @@
               </el-table-column>
               <el-table-column
                 prop="IsOpen"
-                label="是否开启">
+                label="主机状态">
                 <template slot-scope="scope">
-                  <span v-if="scope.row.IsOpen === 1">是</span>
-                  <span v-if="scope.row.IsOpen !== 1" style="color: red">否</span>
+                  
+                </template>
+              </el-table-column>
+              <el-table-column
+                label="查看节点">
+                <template slot-scope="scope">
+                  <el-button
+                    size="mini"
+                    type="primary" @click="detail(scope.$index, scope.row)">查看节点</el-button>
                 </template>
               </el-table-column>
               <el-table-column label="操作">
@@ -155,7 +162,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../assets/scss/variable.scss';
+
 #gn {
+  @extend .pager;
   .detailInfo {
     font-size: 0.9rem;
 

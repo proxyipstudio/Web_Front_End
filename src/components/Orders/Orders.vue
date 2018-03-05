@@ -298,7 +298,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import '../../assets/scss/variable.scss';
+  
   #orders {
+    @extend .pager;
 
     .itemInfo {
       width: 50%;
