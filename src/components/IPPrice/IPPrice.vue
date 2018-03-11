@@ -86,7 +86,7 @@
                     <el-table-column
                       label="图片">
                       <template slot-scope="scope">
-                        <a :href="scope.row.PicPath" target="_blank">查看</a>
+                        <a :href='scope.row.PicPath' target="_blank">查看</a>
                       </template>
                     </el-table-column>
                     <el-table-column

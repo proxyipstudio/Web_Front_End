@@ -15,9 +15,10 @@ import AccountSettings from '@/components/AccountSettings/AccountSettings';
 import RuleConfiguration from '@/components/RuleConfiguration/RuleConfiguration';
 import CheckConfiguration from '@/components/CheckConfiguration/CheckConfiguration';
 import IPPrice from '@/components/IPPrice/IPPrice';
-import Versions from '@/components/Versions/Versions';
+import Clients from '@/components/Clients/Clients';
 import CheckNode from '@/components/CheckNode/CheckNode';
 import GatherNode from '@/components/GatherNode/GatherNode';
+import Tasks from '@/components/Tasks/Tasks';
 
 Vue.use(Router);
 
@@ -91,9 +92,14 @@ export default new Router({
           component: IPPrice
         },
         {
-          path: 'versions',
-          name: 'Versions',
-          component: Versions
+          path: 'clients',
+          name: 'Clients',
+          component: Clients
+        },
+        {
+          path: 'tasks',
+          name: 'Tasks',
+          component: Tasks
         },
         {
           path: 'gathernode',

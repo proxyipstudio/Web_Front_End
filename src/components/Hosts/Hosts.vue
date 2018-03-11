@@ -12,13 +12,28 @@
             <el-table
             :data="vpsData"
             border
+            v-loading="loadingflag"
             :height="tableHeight"
             style="width: 100%; border: 0 none"
             ref="gnTable"
             :row-class-name="tableRowClassName">
               <el-table-column
-                prop="HostName"
                 label="主机名">
+                <template slot-scope="scope">
+                  <el-popover
+                    ref="popover4"
+                    placement="right"
+                    width="400"
+                    trigger="hover">
+                    <el-table :data="gridData">
+                      <el-table-column width="150" property="date" label="日期"></el-table-column>
+                      <el-table-column width="100" property="name" label="姓名"></el-table-column>
+                      <el-table-column width="300" property="address" label="地址"></el-table-column>
+                    </el-table>
+                    <el-button size="mini" type="primary">查看更多</el-button>
+                  </el-popover>
+                  <span v-popover:popover4 v-text="scope.row.HostName" style="color: #409EFF;cursor: pointer;"></span>
+                </template>
               </el-table-column>
               <el-table-column
                 prop="IPIn"
@@ -43,14 +58,6 @@
                 label="主机状态">
                 <template slot-scope="scope">
                   
-                </template>
-              </el-table-column>
-              <el-table-column
-                label="查看节点">
-                <template slot-scope="scope">
-                  <el-button
-                    size="mini"
-                    type="primary" @click="detail(scope.$index, scope.row)">查看节点</el-button>
                 </template>
               </el-table-column>
               <el-table-column label="操作">
@@ -99,6 +106,42 @@ export default {
       tableHeight: document.documentElement.clientHeight - 235,
       total: 0,
       vpsData: [],
+
+      loadingflag: true,
+
+      gridData: [{
+        date: '2016-05-02',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      }, {
+        date: '2016-05-04',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      }, {
+        date: '2016-05-01',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      }, {
+        date: '2016-05-03',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      }, {
+        date: '2016-05-01',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      }, {
+        date: '2016-05-03',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      }, {
+        date: '2016-05-01',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      }, {
+        date: '2016-05-03',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      }]
     };
   },
   methods: {
@@ -127,6 +170,7 @@ export default {
     }),
     // 获取主机信息
     async getVPSList(pageIndex = 1) {
+      this.loadingflag = true;
       try {
         const data = await utils.post(API.GET_VPS_LIST, {
           pageIndex,
@@ -144,9 +188,11 @@ export default {
             this.vpsData.push(item);
 
           });
-
+          this.loadingflag = false;
           return;
         }
+
+        utils.error(data.msg);
       } catch (e) {
         console.log(e);
       }

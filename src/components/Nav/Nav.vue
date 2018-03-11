@@ -15,11 +15,11 @@
           <el-submenu index="1">
             <template slot="title">
               <i class="fa fa-navicon"></i>
-              <span>扫描节点</span>
+              <span>节点管理</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="1-1" @click="goto('/backstage/gathernode/scadanode')">节点管理</el-menu-item>
-              <el-menu-item index="1-2" @click="goto('/backstage/versions')">版本管理</el-menu-item>
+              <el-menu-item index="1-1" @click="goto('/backstage/gathernode/scadanode')">节点状态</el-menu-item>
+              <el-menu-item index="1-2" @click="goto('/backstage/clients')">客户端管理</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
           <el-menu-item index="2" @click="goto('/backstage/hosts')">
@@ -38,7 +38,7 @@
           </el-submenu>
           <el-submenu index="5">
             <template slot="title">
-              <i class="fa fa-navicon"></i>
+              <i class="fa fa-sliders"></i>
               <span>规则配置</span>
             </template>
             <el-menu-item-group>
@@ -46,6 +46,10 @@
               <el-menu-item index="5-2" @click="goto('/backstage/checkconfiguration')">校验规则</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
+          <el-menu-item index="11" @click="goto('/backstage/tasks')">
+            <i class="fa fa-tasks"></i>
+            <span slot="title">任务管理</span>
+          </el-menu-item>
           <el-menu-item index="7" @click="goto('/backstage/ipprice')">
             <i class="fa fa-code"></i>
             <span slot="title">IP价格表</span>

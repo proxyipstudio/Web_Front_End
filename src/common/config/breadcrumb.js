@@ -111,12 +111,17 @@ export const RuleConfiguration = [{
 }
 ];
 
-export const Versions = [{
-  text: '组件管理',
+export const Clients = [{
+  text: '客户端管理',
   route: ''
 }];
 
 export const IPPrice = [{
   text: 'IP价格表',
+  route: ''
+}];
+
+export const Tasks = [{
+  text: '任务管理',
   route: ''
 }];

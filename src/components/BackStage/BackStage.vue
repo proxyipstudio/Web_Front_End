@@ -9,12 +9,10 @@
 
           <el-breadcrumb-item v-for="(item, index) in breadcrumb" :key="index" :to="{ path: item.route }"><span v-text="item.text"></span></el-breadcrumb-item>
 
-          <!-- <el-breadcrumb-item :to="{ path: '/backstage/gathernodes' }">扫描节点</el-breadcrumb-item>
-          <el-breadcrumb-item>扫描节点列表</el-breadcrumb-item> -->
         </el-breadcrumb>
       </el-card>
 
-      <transition name="el-fade-in-linear">
+      <transition name="el-zoom-in-center">
         <router-view></router-view>
       </transition>
 

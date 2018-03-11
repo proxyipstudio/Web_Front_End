@@ -22,7 +22,7 @@
               </el-col>
               <el-col :span="16">
                 <div class="grid-content">
-                  <el-input placeholder="用户名" v-model="usrname"></el-input>
+                  <el-input placeholder="用户名" v-model="usrname" @keyup.enter.native="setPwdFocus"></el-input>
                 </div>
               </el-col>
             </el-row>
@@ -37,7 +37,7 @@
               </el-col>
               <el-col :span="16">
                 <div class="grid-content">
-                  <el-input placeholder="密码" v-model="pwd" type="password" @keyup.enter.native="login"></el-input>
+                  <el-input placeholder="密码" v-model="pwd" type="password" @keyup.enter.native="login" ref="pwdInput"></el-input>
                 </div>
               </el-col>
             </el-row>
@@ -113,6 +113,9 @@ export default {
       }, 1000);
 
       // this.$router.push('/backstage')
+    },
+    setPwdFocus() {
+      this.$refs.pwdInput.focus();
     },
     ...mapMutations({
       setUsrName: "setUsrName"

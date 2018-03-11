@@ -68,6 +68,14 @@ const API = {
 
   // 退出
   'LOGIN_OUT': cu('/LoginOut'),
+
+
+  // 模块相关
+
+  // 添加 修改模块
+  'AU_MODULE': cu('/Code/AUModule'),
+  // 获取模块列表
+  'GET_MODULE': cu('/Code/GetModule'),
 }
 
 export default API;
