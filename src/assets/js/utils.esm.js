@@ -165,6 +165,13 @@ utils.success = (message = '', title = '成功') => {
   });
 }
 
+utils.info = (message = '', title = '通知') => {
+  this.scpoe.$info({
+    title,
+    message
+  });
+}
+
 utils.verify = (type, str) => {
   switch (type) {
     case 'url':

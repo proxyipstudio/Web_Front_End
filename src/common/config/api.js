@@ -76,6 +76,10 @@ const API = {
   'AU_MODULE': cu('/Code/AUModule'),
   // 获取模块列表
   'GET_MODULE': cu('/Code/GetModule'),
+  // 删除模块 客户端
+  'DELETE_CODE': cu('/Code/DeleteCode'),
+  // 获取模块对应的客户端
+  'GET_CLIENT': cu('/Code/GetClient'),
 }
 
 export default API;

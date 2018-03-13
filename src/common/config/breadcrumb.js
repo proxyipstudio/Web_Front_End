@@ -23,20 +23,12 @@ export const AddNode = [{
 }];
 
 export const Hosts = [{
-    text: '主机相关',
-    route: '/backstage/hosts'
-  },
-  {
     text: '主机信息',
     route: ''
   }
 ];
 
 export const HostInfomation = [{
-    text: '主机相关',
-    route: '/backstage/hosts'
-  },
-  {
     text: '主机信息',
     route: '/backstage/hosts'
   },
@@ -123,5 +115,17 @@ export const IPPrice = [{
 
 export const Tasks = [{
   text: '任务管理',
+  route: ''
+}];
+
+export const ClientInformation = [{
+  text: '模块',
+  route: '/backstage/modules'
+}, {
+  text: '客户端管理'
+}];
+
+export const NotFound = [{
+  text: '404',
   route: ''
 }];

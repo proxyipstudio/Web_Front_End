@@ -1,12 +1,12 @@
 <template>
-  <div id="tasks">
-    Tasks
+  <div id="notfound">
+    404
   </div>
 </template>
 
 <script>
 import { mapMutations } from "vuex";
-import { Tasks } from "../../common/config/breadcrumb";
+import { NotFound } from "../../common/config/breadcrumb";
 import utils from '../../assets/js/utils.esm';
 import API from '../../common/config/api';
 
@@ -23,8 +23,8 @@ export default {
     })
   },
   mounted() {
-    this.setNavActive("11");
-    this.setBreadcrumb(Tasks);
+    this.setNavActive("");
+    this.setBreadcrumb(NotFound);
     utils.setScpoe(this);
   }
 };
@@ -33,7 +33,7 @@ export default {
 <style lang="scss" scoped>
   @import '../../assets/scss/variable.scss';
 
-  #tasks {
+  #notfound {
     @extend .pager;
   }
 

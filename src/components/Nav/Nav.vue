@@ -19,7 +19,7 @@
             </template>
             <el-menu-item-group>
               <el-menu-item index="1-1" @click="goto('/backstage/gathernode/scadanode')">节点状态</el-menu-item>
-              <el-menu-item index="1-2" @click="goto('/backstage/clients')">客户端管理</el-menu-item>
+              <el-menu-item index="1-2" @click="goto('/backstage/modules')">模块与客户端</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
           <el-menu-item index="2" @click="goto('/backstage/hosts')">

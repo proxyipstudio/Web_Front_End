@@ -15,15 +15,20 @@ import AccountSettings from '@/components/AccountSettings/AccountSettings';
 import RuleConfiguration from '@/components/RuleConfiguration/RuleConfiguration';
 import CheckConfiguration from '@/components/CheckConfiguration/CheckConfiguration';
 import IPPrice from '@/components/IPPrice/IPPrice';
-import Clients from '@/components/Clients/Clients';
+import Modules from '@/components/Modules/Modules';
+import ClientInformation from '@/components/ClientInformation/ClientInformation';
 import CheckNode from '@/components/CheckNode/CheckNode';
 import GatherNode from '@/components/GatherNode/GatherNode';
 import Tasks from '@/components/Tasks/Tasks';
+import NotFound from '@/components/NotFound/NotFound';
 
 Vue.use(Router);
 
 export default new Router({
   routes: [{
+      path: '*',
+      redirect: '/backstage/notfound'
+    }, {
       path: '/',
       redirect: '/login'
     },
@@ -38,6 +43,10 @@ export default new Router({
       component: BackStage,
       redirect: '/backstage/dashboard',
       children: [{
+          path: 'notfound',
+          component: NotFound,
+          name: 'NotFound'
+        },{
           path: 'dashboard',
           name: 'Dashboard',
           component: Dashboard
@@ -92,9 +101,14 @@ export default new Router({
           component: IPPrice
         },
         {
-          path: 'clients',
-          name: 'Clients',
-          component: Clients
+          path: 'modules',
+          name: 'Modules',
+          component: Modules
+        },
+        {
+          path: 'modules/clients/:id',
+          name: 'ClientInformation',
+          component: ClientInformation
         },
         {
           path: 'tasks',
@@ -105,17 +119,17 @@ export default new Router({
           path: 'gathernode',
           redirect: '/backstage/gathernode/scadanode',
           component: GatherNode,
-          children: [
-          {
-            path: 'scadanode',
-            name: 'ScadaNode',
-            component: ScadaNode
-          },
-          {
-            path: 'checknode',
-            name: 'CheckNode',
-            component: CheckNode
-          }]
+          children: [{
+              path: 'scadanode',
+              name: 'ScadaNode',
+              component: ScadaNode
+            },
+            {
+              path: 'checknode',
+              name: 'CheckNode',
+              component: CheckNode
+            }
+          ]
         }
       ]
     }

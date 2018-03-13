@@ -1,13 +1,14 @@
 <template>
   <div id="gn">
     <el-row :gutter="10">
-      <el-col :span="17">
+      <el-col :span="24">
+      <!-- <el-col :span="17"> -->
         <div class="grid-content">
 
           <div style="margin: 10px 0;">
 
             <el-button type="primary" icon="el-icon-success">打开节点</el-button>
-            <el-button type="primary" icon="el-icon-error">关闭节点</el-button>
+            <el-button type="danger" icon="el-icon-error">关闭节点</el-button>
             <el-button type="danger" icon="el-icon-delete">删除节点</el-button>
           </div>
 
@@ -16,7 +17,7 @@
               <span>采集节点列表</span>
             </div>
             
-            <div v-if="curTable === 'check'">
+            <div>
               <el-table
               :data="gnData"
               border
@@ -31,36 +32,55 @@
                   prop="isrunning">
                 </el-table-column>
                 <el-table-column
-                  prop="hostid"
-                  width="100"
-                  label="宿主机编号">
+                  prop="a.Name"
+                  label="程序名称">
                 </el-table-column>
                 <el-table-column
-                  prop="programname"
-                  label="程序名称"
+                  prop="a.Version"
+                  label="版本"
                   >
                 </el-table-column>
                 <el-table-column
-                  prop="runtime"
-                  label="运行时间"
+                  prop="a.startTime"
+                  label="开始时间"
                   >
                 </el-table-column>
                 <el-table-column
-                  prop="scanrate"
-                  sortable
-                  width="120"
+                  prop="a.Endtime"
+                  label="结束时间">
+                </el-table-column>
+                <el-table-column
+                  prop="a.ScanRate"
                   label="扫描速率">
                 </el-table-column>
                 <el-table-column
-                  prop="scancount"
+                  prop="a.ScanCount"
+                  label="本次扫描数">
+                </el-table-column>
+                <el-table-column
+                  prop="a.ScanSumCount"
                   label="总扫描数">
+                </el-table-column>
+                <el-table-column
+                  label="节点状态">
+                  <template slot-scope="scope">
+                    <div @click="curNode = scope.row">
+                      <el-switch
+                        v-model="scope.row.a.IsOpen"
+                        active-color="#13ce66"
+                        @change="setNodeSatate"
+                        inactive-color="#ff4949">
+                      </el-switch>
+                      <span v-text="scope.row.a.IsOpen ? '开' : '关'"></span>
+                    </div>
+                  </template>
                 </el-table-column>
                 <el-table-column label="操作">
                   <template slot-scope="scope">
                     <el-button
                       size="mini"
-                      type="primary"
-                      @click="handleEdit(scope.$index, scope.row)">详情</el-button>
+                      type="danger"
+                      @click="handleEdit(scope.$index, scope.row)">删除</el-button>
                   </template>
                 </el-table-column>
               </el-table>
@@ -70,72 +90,9 @@
                   @size-change="aaa"
                   @current-change="aaa"
                   :current-page="1"
-                  :page-sizes="[10, 20, 40, 100]"
                   :page-size="20"
-                  layout="total, sizes, prev, pager, next, jumper"
-                  :total="400">
-                </el-pagination>
-              </div>
-            </div>
-
-            <div v-if="curTable === 'gather'">
-              <el-table
-              :data="gnData"
-              border
-              :height="tableHeight"
-              style="width: 100%; border: 0 none"
-              ref="gnTable"
-              @selection-change="handleSelectionChange"
-              :row-class-name="tableRowClassName">
-                <el-table-column
-                  type="selection"
-                  width="55"
-                  prop="isrunning">
-                </el-table-column>
-                <el-table-column
-                  prop="hostid"
-                  width="100"
-                  label="宿主机编号">
-                </el-table-column>
-                <el-table-column
-                  prop="programname"
-                  label="程序名称"
-                  >
-                </el-table-column>
-                <el-table-column
-                  prop="runtime"
-                  label="运行时间"
-                  >
-                </el-table-column>
-                <el-table-column
-                  prop="scanrate"
-                  sortable
-                  width="120"
-                  label="我是菜鸡">
-                </el-table-column>
-                <el-table-column
-                  prop="scancount"
-                  label="总扫描数">
-                </el-table-column>
-                <el-table-column label="操作">
-                  <template slot-scope="scope">
-                    <el-button
-                      size="mini"
-                      type="primary"
-                      @click="handleEdit(scope.$index, scope.row)">详情</el-button>
-                  </template>
-                </el-table-column>
-              </el-table>
-
-              <div class="block" style="text-align: center;">
-                <el-pagination
-                  @size-change="aaa"
-                  @current-change="aaa"
-                  :current-page="1"
-                  :page-sizes="[10, 20, 40, 100]"
-                  :page-size="20"
-                  layout="total, sizes, prev, pager, next, jumper"
-                  :total="50">
+                  layout="total, prev, pager, next, jumper"
+                  :total="total">
                 </el-pagination>
               </div>
             </div>
@@ -146,7 +103,7 @@
 
         </div>
       </el-col>
-      <el-col :span="7">
+      <!-- <el-col :span="7">
         <div class="grid-content">
           <el-card class="box-card">
             <div slot="header" class="clearfix">
@@ -347,7 +304,7 @@
             </div>
           </el-card>
         </div>
-      </el-col>
+      </el-col> -->
     </el-row>
   </div>
 </template>
@@ -362,167 +319,32 @@ export default {
   mounted() {},
   data() {
     return {
-      curTable: "check",
-      value1: false,
-      tableHeight: document.documentElement.clientHeight - 335,
+      tableHeight: document.documentElement.clientHeight - 290,
       multipleSelection: [],
       curGatherNodeInfo: null,
       gnData: [
         {
-          id: 112,
-          version: "12",
-          programname: "呱呱",
-          runtime: "199s",
-          starttime: "2017-1-1",
-          scanrate: "33/s",
-          scancount: "998",
-          hostip: "127.0.1.2",
-          hostid: "9"
-        },
-        {
-          id: 112,
-          version: "12",
-          programname: "呱呱",
-          runtime: "199s",
-          starttime: "2017-1-1",
-          scanrate: "38/s",
-          scancount: "998",
-          hostip: "127.0.1.2",
-          hostid: "9"
-        },
-        {
-          id: 112,
-          version: "12",
-          programname: "呱呱",
-          runtime: "199s",
-          starttime: "2017-1-1",
-          scanrate: "33/s",
-          scancount: "998",
-          hostip: "127.0.1.2",
-          hostid: "9"
-        },
-        {
-          id: 112,
-          version: "12",
-          programname: "呱呱",
-          runtime: "199s",
-          starttime: "2017-1-1",
-          scanrate: "33/s",
-          scancount: "998",
-          hostip: "127.0.1.2",
-          hostid: "9"
-        },
-        {
-          id: 112,
-          version: "12",
-          programname: "呱呱",
-          runtime: "199s",
-          starttime: "2017-1-1",
-          scanrate: "33/s",
-          scancount: "998",
-          hostip: "127.0.1.2",
-          hostid: "9"
-        },
-        {
-          id: 112,
-          version: "12",
-          programname: "呱呱",
-          runtime: "199s",
-          starttime: "2017-1-1",
-          scanrate: "33/s",
-          scancount: "998",
-          hostip: "127.0.1.2",
-          hostid: "9"
-        },
-        {
-          id: 112,
-          version: "12",
-          programname: "呱呱",
-          runtime: "199s",
-          starttime: "2017-1-1",
-          scanrate: "33/s",
-          scancount: "998",
-          hostip: "127.0.1.2",
-          hostid: "9"
-        },
-        {
-          id: 112,
-          version: "12",
-          programname: "呱呱",
-          runtime: "199s",
-          starttime: "2017-1-1",
-          scanrate: "33/s",
-          scancount: "998",
-          hostip: "127.0.1.2",
-          hostid: "9"
-        },
-        {
-          id: 112,
-          version: "12",
-          programname: "呱呱",
-          runtime: "199s",
-          starttime: "2017-1-1",
-          scanrate: "33/s",
-          scancount: "998",
-          hostip: "127.0.1.2",
-          hostid: "9"
-        },
-        {
-          id: 112,
-          version: "12",
-          programname: "呱呱",
-          runtime: "199s",
-          starttime: "2017-1-1",
-          scanrate: "33/s",
-          scancount: "998",
-          hostip: "127.0.1.2",
-          hostid: "9"
-        },
-        {
-          id: 112,
-          version: "12",
-          programname: "呱呱",
-          runtime: "199s",
-          starttime: "2017-1-1",
-          scanrate: "33/s",
-          scancount: "998",
-          hostip: "127.0.1.2",
-          hostid: "9"
-        },
-        {
-          id: 112,
-          version: "12",
-          programname: "呱呱",
-          runtime: "199s",
-          starttime: "2017-1-1",
-          scanrate: "33/s",
-          scancount: "998",
-          hostip: "127.0.1.2",
-          hostid: "9"
-        },
-        {
-          id: 112,
-          version: "12",
-          programname: "呱呱",
-          runtime: "199s",
-          starttime: "2017-1-1",
-          scanrate: "33/s",
-          scancount: "998",
-          hostip: "127.0.1.2",
-          hostid: "9"
-        },
-        {
-          id: 112,
-          version: "12",
-          programname: "呱呱",
-          runtime: "199s",
-          starttime: "2017-1-1",
-          scanrate: "33/s",
-          scancount: "998",
-          hostip: "127.0.1.2",
-          hostid: "9"
+          "a":{
+              "Id":1,
+              "HostId":1,
+              "Name":"测试节点1",
+              "Version":"1.0.0.0",
+              "startTime":null,
+              "Endtime":null,
+              "ScanRate":"33/s",
+              "ScanCount":198,
+              "ScanSumCount":209,
+              "IsOpen":false,
+              "NodeType":1
+          },
+          "HostName":"vps测试节点1",
+          "SerialNumber":null
         }
-      ]
+      ],
+
+      total: 0,
+      
+      curNode: {},
     };
   },
   methods: {
@@ -539,6 +361,13 @@ export default {
         hostip: "127.0.1.2",
         hostid: "9"
       };
+    },
+    setNodeSatate(val) {
+      try {
+        
+      } catch(e) {
+
+      }
     },
     handleDelete(index, row) {
       console.log(index, row);
@@ -561,13 +390,29 @@ export default {
       setNavActive: "setNavActive",
       setBreadcrumb: "setBreadcrumb"
     }),
-    async getGatherNodes() {
-      const data = await utils.post(API.GET_NODE_INFO_LIST, {
-        pageIndex: 1,
-        pageNumber: 20,
-        NodeType: 1
-      });
-    }
+    async getGatherNodes(pageIndex = 1) {
+      try {
+        const { status, data, msg } = await utils.post(API.GET_NODE_INFO_LIST, {
+          pageIndex,
+          pageNumber: 20,
+          NodeType: 1
+        });
+
+        if (status) {
+          let cpData = data.list;
+          cpData.forEach(item => {
+            item.a.IsOpen = item.a.IsOpen ? true : false;
+          });
+          this.gnData = cpData;
+          return;
+        }
+        this.total = data.count;
+        utils.error(msg);
+      } catch (e) {
+        console.log(e);
+        utils.errormsg();
+      }
+    },
   },
   mounted() {
     this.setNavActive("1-1");
