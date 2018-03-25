@@ -6,10 +6,8 @@
         <div class="grid-content">
 
           <div style="margin: 10px 0;">
-
-            <el-button type="primary" icon="el-icon-success">打开节点</el-button>
-            <el-button type="danger" icon="el-icon-error">关闭节点</el-button>
-            <el-button type="danger" icon="el-icon-delete">删除节点</el-button>
+            <el-button type="primary" icon="el-icon-success" @click="batchOp(false)" :disabled="isDisabled">打开节点</el-button>
+            <el-button type="danger" icon="el-icon-error" @click="batchOp(true)" :disabled="isDisabled">关闭节点</el-button>
           </div>
 
           <el-card class="box-card" body-style="padding: 0;">
@@ -28,8 +26,22 @@
               :row-class-name="tableRowClassName">
                 <el-table-column
                   type="selection"
-                  width="55"
-                  prop="isrunning">
+                  width="55">
+                </el-table-column>
+                <el-table-column
+                  label="节点状态">
+                  <template slot-scope="scope">
+                    <div @click="curNode = scope.row">
+                      <el-switch
+                        v-model="scope.row.a.IsOpen"
+                        active-color="#13ce66"
+                        @change="setNodeState(scope.row)"
+                        inactive-color="#ff4949"
+                        :disabled="isDisabled">
+                      </el-switch>
+                      <span v-text="scope.row.a.IsOpen ? '开' : '关'"></span>
+                    </div>
+                  </template>
                 </el-table-column>
                 <el-table-column
                   prop="a.Name"
@@ -60,28 +72,6 @@
                 <el-table-column
                   prop="a.ScanSumCount"
                   label="总扫描数">
-                </el-table-column>
-                <el-table-column
-                  label="节点状态">
-                  <template slot-scope="scope">
-                    <div @click="curNode = scope.row">
-                      <el-switch
-                        v-model="scope.row.a.IsOpen"
-                        active-color="#13ce66"
-                        @change="setNodeSatate"
-                        inactive-color="#ff4949">
-                      </el-switch>
-                      <span v-text="scope.row.a.IsOpen ? '开' : '关'"></span>
-                    </div>
-                  </template>
-                </el-table-column>
-                <el-table-column label="操作">
-                  <template slot-scope="scope">
-                    <el-button
-                      size="mini"
-                      type="danger"
-                      @click="handleEdit(scope.$index, scope.row)">删除</el-button>
-                  </template>
                 </el-table-column>
               </el-table>
 
@@ -322,32 +312,71 @@ export default {
       tableHeight: document.documentElement.clientHeight - 290,
       multipleSelection: [],
       curGatherNodeInfo: null,
-      gnData: [
-        {
-          "a":{
-              "Id":1,
-              "HostId":1,
-              "Name":"测试节点1",
-              "Version":"1.0.0.0",
-              "startTime":null,
-              "Endtime":null,
-              "ScanRate":"33/s",
-              "ScanCount":198,
-              "ScanSumCount":209,
-              "IsOpen":false,
-              "NodeType":1
-          },
-          "HostName":"vps测试节点1",
-          "SerialNumber":null
-        }
-      ],
+      gnData: [],
 
       total: 0,
       
       curNode: {},
+      isDisabled: false,
     };
   },
   methods: {
+    // 批量操作
+    async batchOp(stat) {
+      // 判断是否选中节点
+      if (this.multipleSelection.length === 0) {
+        utils.error('请选择节点');
+        return;
+      }
+
+      const statText = stat ? '关闭' : '开启';
+      
+      // 选取需要改变状态的节点
+      let needOpNode = [];
+      this.multipleSelection.forEach(item => {
+        if (item.a.IsOpen === stat) needOpNode.push(item);
+      });
+
+      // 判断是否需要下一步操作
+      if (needOpNode.length === 0) {
+        utils.info(`选中的节点都处于${statText}状态`);
+        return;
+      }
+
+      let total = needOpNode.length;
+      let done = 0;
+
+      this.isDisabled = true;
+
+      utils.info(`开始批量${statText}节点`);
+
+      for (let i = 0; i < total; i ++) {
+        const Id = needOpNode[i].a.Id;
+        const IsOpen = needOpNode[i].a.IsOpen ? 0 : 1;
+
+        try {
+          const { status, data, msg } = await utils.post(API.OPEN_NODE, { Id, IsOpen });
+
+          if (status) {
+            utils.msg(`第${i + 1}个节点${statText}成功`);
+            needOpNode[i].a.IsOpen = !needOpNode[i].a.IsOpen;
+            done ++;
+          } else {
+            utils.msgErr(`第${i + 1}个节点${statText}失败`);
+          }
+
+        } catch (e) {
+
+          utils.msgErr(`第${i + 1}个节点${statText}失败`);
+
+        }
+      }
+
+      utils.success(`共${statText}${total}个节点, ${statText}失败为${total - done}个`);
+      this.isDisabled = false;
+
+    },
+
     handleEdit(index, row) {
       console.log(index, row);
       this.curGatherNodeInfo = {
@@ -362,11 +391,21 @@ export default {
         hostid: "9"
       };
     },
-    setNodeSatate(val) {
+    async setNodeState(item) {
+      const IsOpen = item.a.IsOpen ? 1 : 0;
       try {
-        
-      } catch(e) {
+        const { status, data, msg } = await utils.post(API.OPEN_NODE, { IsOpen, Id: item.a.Id });
 
+        if (status) {
+          utils.success(msg);
+          return;
+        }
+
+        utils.error(msg);
+        item.a.IsOpen = !item.a.IsOpen;
+      } catch(e) {
+        utils.errormsg();
+        item.a.IsOpen = !item.a.IsOpen;
       }
     },
     handleDelete(index, row) {

@@ -20,7 +20,21 @@ export default {
     handleClick(tab) {
       this.$router.push(tab.name);
     }
+  },
+  mounted() {
+    switch (this.$route.name) {
+      case 'CheckNode':
+        this.tabroute = '/backstage/gathernode/checknode';
+        break;
+    
+      case 'ScadaNode':
+        this.tabroute = '/backstage/gathernode/scadanode';
+        break;
+      default:
+        break;
+    }
   }
+
 }
 </script>
 

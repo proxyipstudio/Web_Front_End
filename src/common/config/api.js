@@ -1,5 +1,5 @@
-const DEV_IP = 'http://47.93.242.107:8111';
-const PRO_IP = 'http://47.93.242.107:8111';
+const DEV_IP = 'http://47.94.99.114:8111';
+const PRO_IP = 'http://47.94.99.114:8111';
 
 const cu = path => process.env.NODE_ENV === 'development' ? DEV_IP + path : PRO_IP + path;
 
@@ -20,6 +20,8 @@ const API = {
   'DELETE_TASK_RULE': cu('/TaskRule/DeleteTaskRule'),
   // 采集规则列表
   'GET_TASK_RULE_LIST': cu('/TaskRule/GetTaskRuleList'),
+  // 获取所有菜鸡规则
+  'GET_TASK_RULE_LIST_ONLY_URL': cu('/TaskRule/GetTaskRuleListOnlyUrl'),
 
 
   // 校验规则
@@ -38,6 +40,8 @@ const API = {
   'GET_NODE_INFO_LIST': cu('/NodeInfo/GetNodeInfoList'),
   // 添加节点
   'AU_NODE': cu('/NodeInfo/AUNode'),
+  // 开关节点
+  'OPEN_NODE': cu('/NodeInfo/OpenNode'),
 
   
   // 主机信息
@@ -80,6 +84,33 @@ const API = {
   'DELETE_CODE': cu('/Code/DeleteCode'),
   // 获取模块对应的客户端
   'GET_CLIENT': cu('/Code/GetClient'),
+
+  // 客户端相关
+
+  // 添加 修改客户端
+  'AU_CLIENT': cu('/Code/AUClient'),
+  // 删除客户端
+  'AU_CLIENT': cu('/Code/AUClient'),
+
+
+  // 版本相关
+
+  // 新增 修改客户端
+  'AU_VERSION': cu('/VersionInfo/AUVersion'),
+  // 获取客户端版本列表
+  'GET_VERSION_LIST': cu('/VersionInfo/GetVersionList'),
+  // 根据id获取客户端
+  'GET_VERSION_INFO_BY_ID': cu('/VersionInfo/GetVersionInfoById'),
+  // 删除客户端
+  'DELETE_VERSION': cu('/VersionInfo/DeleteVersion'),
+
+
+  // 任务管理相关
+
+  // 添加 修改任务
+  'GET_COLLECTION_TASK_LIST': cu('/CollectionTask/GetCollectionTaskList'),
+  'AU_COLLECTION_TASK': cu('/CollectionTask/AUCollectionTask'),
+  
 }
 
 export default API;

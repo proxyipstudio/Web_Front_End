@@ -563,6 +563,7 @@ export default {
   },
   filters: {
     formatTableDataLength(val) {
+      if (!val) return val;
       if (val.length > 12) {
         return val.substring(0, 12) + "...";
       }

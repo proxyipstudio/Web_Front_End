@@ -166,10 +166,25 @@ utils.success = (message = '', title = '成功') => {
 }
 
 utils.info = (message = '', title = '通知') => {
-  this.scpoe.$info({
+  this.scpoe.$notify.info({
     title,
     message
   });
+}
+
+utils.msg = (message = '') => {
+  this.scpoe.$message({
+    message,
+    type: 'success'
+  });
+}
+
+utils.msgInfo = (message = '') => {
+  this.scpoe.$message(message);
+}
+
+utils.msgErr = (message = '') => {
+  this.scpoe.$message.error(message);
 }
 
 utils.verify = (type, str) => {

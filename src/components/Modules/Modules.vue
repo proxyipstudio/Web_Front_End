@@ -1,13 +1,69 @@
 <template>
   <div id="modules">
 
-    <el-row>
-      <el-button type="primary" style="margin: 10px 0;" @click="showAddModuleForm = true">创建模块</el-button>
+    <el-tabs tab-position="left">
+      <el-tab-pane label="模块管理">
+        <el-col :span="24">
+          <div class="grid-content">
+            <el-card class="box-card" body-style="padding: 0;">
+              <div slot="header" class="clearfix">
+                <span>模块表</span>
+              </div>
+              <div>
+                <el-table
+                  v-loading="loadingDataModule"
+                  :data="tbModule"
+                  border
+                  ref="tb"
+                  style="width: 100%; border: 0;"
+                  @expand-change="setRuleDataModule">
+                  <el-table-column type="expand">
+                    <template slot-scope="props">
+                      
+                      <el-form ref="form" :model="curModule" label-width="80px">
+                        <el-form-item label="英文名">
+                          <el-input v-model="curModule.C_Key"></el-input>
+                        </el-form-item>
+                        <el-form-item label="中文名">
+                          <el-input v-model="curModule.C_Name"></el-input>
+                        </el-form-item>
+                        <el-form-item label="描述">
+                          <el-input v-model="curModule.C_Description"></el-input>
+                        </el-form-item>
+                        <el-form-item label="">
+                          <el-button type="primary" size="mini" @click="updateModule">保存</el-button>
+                        </el-form-item>
+                      </el-form>
 
-      <el-dialog
-        title="创建模块"
-        :visible.sync="showAddModuleForm"
-        width="50%">
+                    </template>
+                  </el-table-column>
+                  <el-table-column
+                    label="英文名">
+                    <template slot-scope="scope">
+                      {{ scope.row.C_Key }}
+                    </template>
+                  </el-table-column>
+                  <el-table-column
+                    label="中文名">
+                    <template slot-scope="scope">
+                      {{ scope.row.C_Name }}
+                    </template>
+                  </el-table-column>
+                  <el-table-column
+                    label="操作">
+                    <template slot-scope="scope">
+                      <el-button type="primary" size="mini" @click="toInfo(scope.row.CodeId)">详情</el-button>
+                      <el-button type="danger" size="mini" @click="delModule(scope.row.CodeId)">删除</el-button>
+                    </template>
+                  </el-table-column>
+                </el-table>
+              </div>
+            </el-card>
+          </div>
+        </el-col>
+      </el-tab-pane>
+      <el-tab-pane label="创建模块">
+
         <el-form :model="addModuleForm" label-width="100px">
           <el-form-item label="模块英文名">
             <el-input v-model="addModuleForm.C_Key"></el-input>
@@ -18,73 +74,15 @@
           <el-form-item label="描述">
             <el-input v-model="addModuleForm.C_Description"></el-input>
           </el-form-item>
+          <el-form-item label="">
+            <el-button type="primary" @click="addModule">添 加</el-button>
+          </el-form-item>
         </el-form>
-        <span slot="footer" class="dialog-footer">
-          <el-button @click="showAddModuleForm = false">取 消</el-button>
-          <el-button type="primary" @click="addModule">添 加</el-button>
-        </span>
-      </el-dialog>
+        
 
-      <el-col :span="24">
-        <div class="grid-content">
-          <el-card class="box-card" body-style="padding: 0;">
-            <div slot="header" class="clearfix">
-              <span>模块表</span>
-            </div>
-            <div>
-              <el-table
-                v-loading="loadingDataModule"
-                :data="tbModule"
-                border
-                ref="tb"
-                style="width: 100%; border: 0;"
-                @expand-change="setRuleDataModule">
-                <el-table-column type="expand">
-                  <template slot-scope="props">
-                    
-                    <el-form ref="form" :model="curModule" label-width="80px">
-                      <el-form-item label="英文名">
-                        <el-input v-model="curModule.C_Key"></el-input>
-                      </el-form-item>
-                      <el-form-item label="中文名">
-                        <el-input v-model="curModule.C_Name"></el-input>
-                      </el-form-item>
-                      <el-form-item label="描述">
-                        <el-input v-model="curModule.C_Description"></el-input>
-                      </el-form-item>
-                      <el-form-item label="">
-                        <el-button type="primary" size="mini" @click="updateModule">保存</el-button>
-                      </el-form-item>
-                    </el-form>
+      </el-tab-pane>
+    </el-tabs>
 
-                  </template>
-                </el-table-column>
-                <el-table-column
-                  label="英文名">
-                  <template slot-scope="scope">
-                    {{ scope.row.C_Key }}
-                  </template>
-                </el-table-column>
-                <el-table-column
-                  label="中文名">
-                  <template slot-scope="scope">
-                    {{ scope.row.C_Name }}
-                  </template>
-                </el-table-column>
-                <el-table-column
-                  label="操作">
-                  <template slot-scope="scope">
-                    <el-button type="primary" size="mini" @click="toInfo(scope.row.CodeId)">详情</el-button>
-                    <el-button type="danger" size="mini" @click="delModule(scope.row.CodeId)">删除</el-button>
-                  </template>
-                </el-table-column>
-              </el-table>
-            </div>
-          </el-card>
-        </div>
-      </el-col>
-
-    </el-row>
     <div class="empty"></div>
   </div>
 </template>
@@ -155,6 +153,7 @@ export default {
 
         if (status) {
           utils.success(msg);
+          this.getModules();
           return;
         }
 

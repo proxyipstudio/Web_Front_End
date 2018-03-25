@@ -21,14 +21,17 @@ import CheckNode from '@/components/CheckNode/CheckNode';
 import GatherNode from '@/components/GatherNode/GatherNode';
 import Tasks from '@/components/Tasks/Tasks';
 import NotFound from '@/components/NotFound/NotFound';
+import Versions from '@/components/Versions/Versions';
 
 Vue.use(Router);
 
 export default new Router({
-  routes: [{
+  routes: [
+    {
       path: '*',
       redirect: '/backstage/notfound'
-    }, {
+    }, 
+    {
       path: '/',
       redirect: '/login'
     },
@@ -42,11 +45,13 @@ export default new Router({
       name: 'BackStage',
       component: BackStage,
       redirect: '/backstage/dashboard',
-      children: [{
+      children: [
+        {
           path: 'notfound',
           component: NotFound,
           name: 'NotFound'
-        },{
+        },
+        {
           path: 'dashboard',
           name: 'Dashboard',
           component: Dashboard
@@ -111,6 +116,11 @@ export default new Router({
           component: ClientInformation
         },
         {
+          path: 'modules/clients/:id/versions/:clientid',
+          name: 'Versions',
+          component: Versions
+        },
+        {
           path: 'tasks',
           name: 'Tasks',
           component: Tasks
@@ -119,7 +129,8 @@ export default new Router({
           path: 'gathernode',
           redirect: '/backstage/gathernode/scadanode',
           component: GatherNode,
-          children: [{
+          children: [
+            {
               path: 'scadanode',
               name: 'ScadaNode',
               component: ScadaNode

@@ -12,7 +12,7 @@
         </el-breadcrumb>
       </el-card>
 
-      <transition name="el-zoom-in-center">
+      <transition name="el-fade-in">
         <router-view></router-view>
       </transition>
 

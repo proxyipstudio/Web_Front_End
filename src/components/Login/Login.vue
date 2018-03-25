@@ -22,7 +22,7 @@
               </el-col>
               <el-col :span="16">
                 <div class="grid-content">
-                  <el-input placeholder="用户名" v-model="usrname" @keyup.enter.native="setPwdFocus"></el-input>
+                  <el-input ref="usrname" placeholder="用户名" v-model="usrname" @keyup.enter.native="setPwdFocus"></el-input>
                 </div>
               </el-col>
             </el-row>
@@ -79,7 +79,7 @@ export default {
     };
   },
   async mounted() {
-
+    this.$refs.usrname.focus();
   },
   methods: {
     login() {

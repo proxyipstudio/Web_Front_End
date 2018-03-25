@@ -368,7 +368,7 @@ export default {
       }
     },
     // 加载采集规则
-    async getRuleList(index = 1) {
+    async getRuleList() {
       this.loadingData = true;
       try {
         const data = await utils.post(API.GET_CHECK_RULE_LIST);
